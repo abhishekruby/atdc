@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Meet Our Specialists | ATDC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-shift {
+            transition: background-color 0.3s ease;
+        }
+        .glass-nav {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#b3ebff",
+                        "primary-fixed-dim": "#b5c4ff",
+                        "on-background": "#181c20",
+                        "surface-variant": "#e0e3e8",
+                        "outline-variant": "#c5c6d2",
+                        "primary-container": "#0a2463",
+                        "primary": "#00103e",
+                        "error-container": "#ffdad6",
+                        "secondary": "#00677d",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#6ff7f4",
+                        "secondary-container": "#50d9fe",
+                        "primary-fixed": "#dce1ff",
+                        "on-primary-fixed": "#00164d",
+                        "surface-bright": "#f7f9ff",
+                        "surface-container-low": "#f1f4f9",
+                        "on-secondary-fixed": "#001f27",
+                        "on-secondary": "#ffffff",
+                        "background": "#f7f9ff",
+                        "surface-container-high": "#e5e8ee",
+                        "on-surface": "#181c20",
+                        "outline": "#757681",
+                        "inverse-surface": "#2d3135",
+                        "tertiary": "#001818",
+                        "surface-container": "#ebeef3",
+                        "surface-tint": "#475b9c",
+                        "surface": "#f7f9ff",
+                        "on-tertiary-container": "#00a19f",
+                        "on-primary-fixed-variant": "#2e4382",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#4ddad8",
+                        "on-secondary-fixed-variant": "#004e5f",
+                        "on-tertiary-fixed-variant": "#00504f",
+                        "surface-container-highest": "#e0e3e8",
+                        "inverse-primary": "#b5c4ff",
+                        "on-primary-container": "#7a8ed2",
+                        "tertiary-container": "#002f2e",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#eef1f6",
+                        "surface-dim": "#d7dadf",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#444650",
+                        "on-tertiary-fixed": "#00201f",
+                        "on-secondary-container": "#005c70",
+                        "secondary-fixed-dim": "#4cd6fb",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-6 h-20">
+<div class="text-xl font-bold text-[#00103E] dark:text-white">ATDC</div>
+<div class="hidden md:flex items-center space-x-8 font-inter text-sm font-medium tracking-tight">
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00103E] dark:hover:text-white hover:bg-slate-100/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">Home</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00103E] dark:hover:text-white hover:bg-slate-100/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">About</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00103E] dark:hover:text-white hover:bg-slate-100/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">Services</a>
+<a class="text-[#00677D] font-bold border-b-2 border-[#00677D] pb-1" href="#">Doctors</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00103E] dark:hover:text-white hover:bg-slate-100/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">Test Prices</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00103E] dark:hover:text-white hover:bg-slate-100/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">Contact</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="hidden lg:flex items-center justify-center p-2 text-primary hover:bg-surface-container-high rounded-full transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+</button>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-xl font-medium text-sm transition-all duration-300 scale-95 active:opacity-80">
+                    Book Appointment
+                </button>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-20 px-6">
+<div class="max-w-7xl mx-auto">
+<!-- Hero Header Section -->
+<header class="mb-16">
+<span class="label-md uppercase tracking-[0.2em] text-secondary font-bold mb-4 block">Medical Expertise</span>
+<h1 class="text-[3.5rem] font-black text-primary leading-none tracking-tight mb-6">Meet Our Specialists</h1>
+<p class="text-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                    Our team of highly qualified diagnostic experts and clinicians are dedicated to providing the most precise medical insights for your health journey.
+                </p>
+</header>
+<!-- Filters Section -->
+<section class="mb-12">
+<div class="flex flex-wrap items-center gap-3">
+<button class="px-6 py-2 rounded-full bg-primary text-on-primary font-medium text-sm transition-all">All Departments</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high font-medium text-sm transition-all">Homeopathy</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high font-medium text-sm transition-all">Pathology</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high font-medium text-sm transition-all">Radiology</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high font-medium text-sm transition-all">Dental</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high font-medium text-sm transition-all">Cardiology</button>
+</div>
+</section>
+<!-- Doctors Bento-Style Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Doctor Card 1 -->
+<div class="group relative bg-surface-container-lowest rounded-[2rem] overflow-hidden shadow-[0px_12px_32px_rgba(0,16,62,0.04)] transition-all duration-500 hover:-translate-y-2">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img alt="Dr. Jagruti J Shah" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="High-quality photo of a professional Indian female doctor in a clinical setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF2Ne3_rYsU-gYPD-pgyyYXxM2L8SPQf2M8qDkIybyTdrXvqhYB3jWeCMqk3UHp2YULQv5OSTPwduBLvXMOElh2QolSKw_HaHFdHa6EysQcJkBDTDJVQBC-jU4sB7Q-RJL_U1PRKp6clJzeXO1fae8kEx5cEKfERfgC9nLsG7ENOX_aXum0_BFa-Y_pR-P0AdzivdXf1fvzZ58DMsee26G5cSpo10ggucV6DupySUQqR_jBz0Xc_JEQM11LItmB6pjWD5cthTwHP27"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+</div>
+<div class="p-8">
+<span class="text-xs font-bold uppercase tracking-widest text-secondary mb-2 block">Homeopathy Specialist</span>
+<h3 class="text-2xl font-bold text-primary mb-2">Dr. Jagruti J Shah</h3>
+<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Over 15 years of experience in constitutional homeopathic treatment and chronic care.</p>
+<button class="w-full bg-surface-container-low text-primary font-bold py-4 rounded-xl flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+                            Book with Doctor
+                            <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Doctor Card 2 -->
+<div class="group relative bg-surface-container-lowest rounded-[2rem] overflow-hidden shadow-[0px_12px_32px_rgba(0,16,62,0.04)] transition-all duration-500 hover:-translate-y-2">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img alt="Dr. Nilesh Patel" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Professional authentic photo of a male Indian radiologist in a modern medical office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl2_i3tOz3NOIcoKWiunCJlbcR2P7eL7Y998Cn2pemCANfXx67FvjCInGmQM-zKnynTvOeP_H4GBa0LZk7QniwwnGymx8p6jabYlFfAi660is7xqt1whWrJqlTlycJmRz1LxaFHr7N42Spa0zlCh8rYU0e-6RF2pGbUy_bjluguy1xRdj69bcKJkacufrbyRGwSRZIw6nLJTE1qpwa7U2JIalUh_EYHgBIGdfv11xxvPOv_CF5yZ0jxyc6CKHoLYVHcDkJdlobO0su"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+</div>
+<div class="p-8">
+<span class="text-xs font-bold uppercase tracking-widest text-secondary mb-2 block">Consultant Radiologist</span>
+<h3 class="text-2xl font-bold text-primary mb-2">Dr. Nilesh Patel</h3>
+<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Expert in advanced MRI and CT imaging with a focus on neuroradiology and oncology.</p>
+<button class="w-full bg-surface-container-low text-primary font-bold py-4 rounded-xl flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+                            Book with Doctor
+                            <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Doctor Card 3 -->
+<div class="group relative bg-surface-container-lowest rounded-[2rem] overflow-hidden shadow-[0px_12px_32px_rgba(0,16,62,0.04)] transition-all duration-500 hover:-translate-y-2">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img alt="Dr. Ananya Mehta" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Authentic professional photo of an Indian female pathologist working in a laboratory" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV8ZcP8CDy5KnYUfY79PHHdthr7-bhi8A4DxJnxZyqruBCh9Ey14qezPJDQwVgnizaBePTQLlJIKPjUvINitlqd0fuQcPxD1kWQ9EDyc_sP2UHR6T6PR0ftE9BHLOz2BaZ3FM9zWb3S5bNZ9NBsc-vPHGshCf20h4ugWJ-SceRv06Y8dNOVlJEiicB5gF3CN5tUgjOeKlErTIz_4Q6O5cfHvpAQiFXInqJTvIWb7b2Qu6o-QDafIKNhBvyLfYOv9DOBxHgq0nb5rYH"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+</div>
+<div class="p-8">
+<span class="text-xs font-bold uppercase tracking-widest text-secondary mb-2 block">Clinical Pathologist</span>
+<h3 class="text-2xl font-bold text-primary mb-2">Dr. Ananya Mehta</h3>
+<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Leading the laboratory medicine wing with precision and ethical diagnostic standards.</p>
+<button class="w-full bg-surface-container-low text-primary font-bold py-4 rounded-xl flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+                            Book with Doctor
+                            <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Doctor Card 4 -->
+<div class="group relative bg-surface-container-lowest rounded-[2rem] overflow-hidden shadow-[0px_12px_32px_rgba(0,16,62,0.04)] transition-all duration-500 hover:-translate-y-2">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img alt="Dr. Rohan Deshmukh" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Professional photo of an Indian male dentist in his clinic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBte_z-EysOdBU7VnimN_dxyassOQMCgmS_Z7gPCxa39DVgaN51XrgdP2KMVc576oLkEK-NIpDS8AVYqAEG4x7Qt7dniopetzgKGOhEVJ4m7QUUP9MOnyXt3e4buXeMOvnDJSCoGEzFUoYuoigUVQYBVc50bHwdW_N6IuBRyav1aLCWjyPbDWIlLjdAXIyLUsSAsfCSC-XiLZII5snBrjaTVGMNrmUvs0UsT9PqBN3zJE01k6MoMigvwhy99nnIUePawejehjPc6lUb"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+</div>
+<div class="p-8">
+<span class="text-xs font-bold uppercase tracking-widest text-secondary mb-2 block">Orthodontic Surgeon</span>
+<h3 class="text-2xl font-bold text-primary mb-2">Dr. Rohan Deshmukh</h3>
+<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Specialized in complex dental surgeries and pediatric orthodontics for over a decade.</p>
+<button class="w-full bg-surface-container-low text-primary font-bold py-4 rounded-xl flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+                            Book with Doctor
+                            <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Doctor Card 5 -->
+<div class="group relative bg-surface-container-lowest rounded-[2rem] overflow-hidden shadow-[0px_12px_32px_rgba(0,16,62,0.04)] transition-all duration-500 hover:-translate-y-2">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img alt="Dr. Vikram Sarabhai" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="High-quality photo of a senior Indian male cardiologist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-OWhWAax2RBFJrTSqpZpMRbclCgtIhshrtC3tCUe3LiPRLBrAfjx8jtAFuYlkarTJQr8YtmKd4fICwmOvTr0I4vDImJ_q7iEoubnIjFznfMK_awodlJsD2cvM3pLwSwkgQES49sm68Dbpk20zl_7Ymq2V8GufpiBKZwFOGih9MlQ7cHszfJhWpbgq-J3GhEnucSw6NVXlftMebJEisTI5xIB4r2HORzV2vGPt3S2ET5W4i4XHCi8TgyWTkBPJpksvZVeO3RhIQTON"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+</div>
+<div class="p-8">
+<span class="text-xs font-bold uppercase tracking-widest text-secondary mb-2 block">Interventional Cardiology</span>
+<h3 class="text-2xl font-bold text-primary mb-2">Dr. Vikram Sarabhai</h3>
+<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Committed to cardiovascular wellness and prevention through advanced screening.</p>
+<button class="w-full bg-surface-container-low text-primary font-bold py-4 rounded-xl flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+                            Book with Doctor
+                            <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Doctor Card 6 -->
+<div class="group relative bg-surface-container-lowest rounded-[2rem] overflow-hidden shadow-[0px_12px_32px_rgba(0,16,62,0.04)] transition-all duration-500 hover:-translate-y-2">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img alt="Dr. Priyanka Chopra" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Authentic professional photo of a female Indian general physician in a clinic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZo250NGNiGC9XWgm5-EJQHSzqw2PZoAqxOkjs_gWxlB9DnHy0bqQviV588FT_rkTRoqHEBRyNUb14FPQ8inubjGJuJ_Dp6TS9iKsZlPPfSC-3Csrit9VxvRtZLNH27KGqiUMTs_KScELcewZLnHO8J04rXuf8KXAurrY_Tc7B3Im6wtxeMGkvUWwtBRw5hNZ8URr4znHOXPp9NheZQ0wzkZs6OMydICJb9skm4zGt6CILRIJU2vej8DfX4MwWxzQUVswQez5RBGym"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+</div>
+<div class="p-8">
+<span class="text-xs font-bold uppercase tracking-widest text-secondary mb-2 block">General Wellness</span>
+<h3 class="text-2xl font-bold text-primary mb-2">Dr. Priyanka Chopra</h3>
+<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Holistic approach to family medicine and preventive healthcare screenings.</p>
+<button class="w-full bg-surface-container-low text-primary font-bold py-4 rounded-xl flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+                            Book with Doctor
+                            <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#F1F4F9] dark:bg-slate-900 w-full rounded-t-[2rem] mt-20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto px-8 py-16">
+<div class="col-span-1 md:col-span-1">
+<div class="text-2xl font-black text-[#00103E] dark:text-white mb-4">ATDC</div>
+<p class="text-slate-500 dark:text-slate-400 font-inter body-lg leading-relaxed">
+                    Acharya Tulsi Diagnostic Centre is committed to providing accurate and reliable diagnostic services with state-of-the-art technology.
+                </p>
+</div>
+<div class="col-span-1">
+<h4 class="text-[#00103E] dark:text-slate-100 font-bold mb-6">Our Branches</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-500 dark:text-slate-400 hover:translate-x-1 transition-transform duration-200 text-[#00677D] block" href="#">Udhna Branch</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:translate-x-1 transition-transform duration-200 text-[#00677D] block" href="#">Pandesara Branch</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:translate-x-1 transition-transform duration-200 text-[#00677D] block" href="#">Bhestan Branch</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:translate-x-1 transition-transform duration-200 text-[#00677D] block" href="#">Sachin Branch</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:translate-x-1 transition-transform duration-200 text-[#00677D] block" href="#">Godadara Branch</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h4 class="text-[#00103E] dark:text-slate-100 font-bold mb-6">Quick Links</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-500 dark:text-slate-400 hover:translate-x-1 transition-transform duration-200 text-[#00677D] block" href="#">Privacy Policy</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:translate-x-1 transition-transform duration-200 text-[#00677D] block" href="#">Terms of Service</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:translate-x-1 transition-transform duration-200 text-[#00677D] block" href="#">Book Test</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:translate-x-1 transition-transform duration-200 text-[#00677D] block" href="#">Home Visit</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h4 class="text-[#00103E] dark:text-slate-100 font-bold mb-6">Connect With Us</h4>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary" data-icon="mail">mail</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary" data-icon="call">call</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary" data-icon="schedule">schedule</span>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 py-8 border-t border-slate-200 dark:border-slate-800 text-center">
+<p class="text-slate-500 dark:text-slate-400 text-sm">© 2024 Acharya Tulsi Diagnostic Centre. All Rights Reserved.</p>
+</div>
+</footer>
+<!-- Floating WhatsApp Button -->
+<a class="fixed bottom-8 right-8 z-[60] bg-tertiary-fixed text-on-tertiary-fixed w-16 h-16 rounded-full flex items-center justify-center shadow-[0px_12px_32px_rgba(0,16,62,0.15)] hover:scale-110 active:scale-95 transition-all duration-300" href="https://wa.me/#" target="_blank">
+<span class="material-symbols-outlined text-3xl font-bold" data-icon="chat">chat</span>
+</a>
+</body></html>

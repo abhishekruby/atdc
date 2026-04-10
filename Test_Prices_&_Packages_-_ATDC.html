@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Test Prices &amp; Packages | ATDC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#b3ebff",
+                    "primary-fixed-dim": "#b5c4ff",
+                    "on-background": "#181c20",
+                    "surface-variant": "#e0e3e8",
+                    "outline-variant": "#c5c6d2",
+                    "primary-container": "#0a2463",
+                    "primary": "#00103e",
+                    "error-container": "#ffdad6",
+                    "secondary": "#00677d",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#6ff7f4",
+                    "secondary-container": "#50d9fe",
+                    "primary-fixed": "#dce1ff",
+                    "on-primary-fixed": "#00164d",
+                    "surface-bright": "#f7f9ff",
+                    "surface-container-low": "#f1f4f9",
+                    "on-secondary-fixed": "#001f27",
+                    "on-secondary": "#ffffff",
+                    "background": "#f7f9ff",
+                    "surface-container-high": "#e5e8ee",
+                    "on-surface": "#181c20",
+                    "outline": "#757681",
+                    "inverse-surface": "#2d3135",
+                    "tertiary": "#001818",
+                    "surface-container": "#ebeef3",
+                    "surface-tint": "#475b9c",
+                    "surface": "#f7f9ff",
+                    "on-tertiary-container": "#00a19f",
+                    "on-primary-fixed-variant": "#2e4382",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#4ddad8",
+                    "on-secondary-fixed-variant": "#004e5f",
+                    "on-tertiary-fixed-variant": "#00504f",
+                    "surface-container-highest": "#e0e3e8",
+                    "inverse-primary": "#b5c4ff",
+                    "on-primary-container": "#7a8ed2",
+                    "tertiary-container": "#002f2e",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#eef1f6",
+                    "surface-dim": "#d7dadf",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#444650",
+                    "on-tertiary-fixed": "#00201f",
+                    "on-secondary-container": "#005c70",
+                    "secondary-fixed-dim": "#4cd6fb",
+                    "error": "#ba1a1a",
+                    "surface-container-lowest": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-shift { transition: background-color 0.3s ease; }
+        .glass-nav { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-6 h-20">
+<div class="text-xl font-bold text-[#00103E] dark:text-white">ATDC</div>
+<div class="hidden md:flex items-center space-x-8 font-inter text-sm font-medium tracking-tight">
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00103E] dark:hover:text-white transition-all duration-300" href="#">Home</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00103E] dark:hover:text-white transition-all duration-300" href="#">About</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00103E] dark:hover:text-white transition-all duration-300" href="#">Services</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00103E] dark:hover:text-white transition-all duration-300" href="#">Doctors</a>
+<a class="text-[#00677D] font-bold border-b-2 border-[#00677D] pb-1" href="#">Test Prices</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00103E] dark:hover:text-white transition-all duration-300" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden lg:flex items-center gap-2 text-primary font-semibold text-sm">
+<span class="material-symbols-outlined text-lg" data-icon="call">call</span>
+                    Helpdesk
+                </button>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-xl font-semibold text-sm hover:opacity-90 scale-95 active:opacity-80 transition-all duration-300">
+                    Book Appointment
+                </button>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
+<!-- Hero Section -->
+<header class="mb-16">
+<span class="text-secondary font-bold tracking-[0.2em] text-[0.75rem] uppercase mb-4 block">DIAGNOSTIC EXCELLENCE</span>
+<h1 class="text-[3.5rem] leading-[1.1] font-black text-primary tracking-tight max-w-3xl mb-6">
+                Transparent Pricing, No Hidden Charges
+            </h1>
+<p class="text-on-surface-variant body-lg max-w-2xl leading-relaxed">
+                Empowering your health journey with clarity. Browse our comprehensive list of 170+ diagnostic tests and curated health packages designed for every need.
+            </p>
+</header>
+<!-- Popular Health Packages (Bento Style) -->
+<section class="mb-24">
+<div class="flex items-end justify-between mb-10">
+<div>
+<h2 class="text-2xl font-extrabold text-primary mb-2">Popular Health Packages</h2>
+<p class="text-on-surface-variant">Recommended preventive screenings for you and your family.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Large Card: Full Body Checkup -->
+<div class="md:col-span-7 bg-primary-container rounded-[2rem] p-10 flex flex-col justify-between text-white relative overflow-hidden group">
+<div class="relative z-10">
+<div class="bg-secondary text-white text-[0.7rem] font-bold tracking-widest uppercase px-3 py-1 rounded-full w-fit mb-6">BEST VALUE</div>
+<h3 class="text-3xl font-bold mb-4">Full Body Checkup</h3>
+<p class="text-primary-fixed-dim max-w-xs mb-8">Comprehensive assessment including Liver, Kidney, Lipid, and Complete Hemogram profiles.</p>
+<div class="flex items-baseline gap-2 mb-8">
+<span class="text-4xl font-black">₹2,499</span>
+<span class="text-primary-fixed-dim line-through opacity-60">₹4,999</span>
+</div>
+</div>
+<button class="relative z-10 bg-secondary-container text-on-secondary-container px-8 py-4 rounded-xl font-bold w-fit hover:bg-white transition-colors duration-300">
+                        Book Now
+                    </button>
+<!-- Background Decoration -->
+<div class="absolute -right-10 -bottom-10 opacity-20 transform group-hover:scale-110 transition-transform duration-700">
+<span class="material-symbols-outlined text-[12rem]" data-icon="health_and_safety">health_and_safety</span>
+</div>
+</div>
+<!-- Column of smaller cards -->
+<div class="md:col-span-5 grid grid-cols-1 gap-6">
+<div class="bg-surface-container-low rounded-[2rem] p-8 flex items-center justify-between group hover:bg-surface-container-high transition-colors">
+<div>
+<h4 class="text-xl font-bold text-primary mb-1">Basic Blood Test</h4>
+<p class="text-2xl font-black text-secondary">₹699</p>
+</div>
+<button class="bg-white p-4 rounded-full shadow-sm group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-[2rem] p-8 flex items-center justify-between group hover:bg-surface-container-high transition-colors">
+<div>
+<h4 class="text-xl font-bold text-primary mb-1">Diabetes Package</h4>
+<p class="text-2xl font-black text-secondary">₹799</p>
+</div>
+<button class="bg-white p-4 rounded-full shadow-sm group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+</div>
+<!-- Secondary Row -->
+<div class="md:col-span-6 bg-surface-container-low rounded-[2rem] p-8 flex flex-col justify-between hover:bg-surface-container-high transition-colors">
+<div>
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-4xl text-secondary" data-icon="bloodtype">bloodtype</span>
+<span class="text-2xl font-black text-primary">₹1,499</span>
+</div>
+<h4 class="text-2xl font-bold text-primary mb-2">Hemoglobin Panel</h4>
+<p class="text-on-surface-variant mb-6">In-depth analysis of iron levels, RBC indices, and peripheral smear examination.</p>
+</div>
+<button class="w-full py-4 border border-outline-variant rounded-xl font-bold text-primary hover:bg-primary hover:text-white transition-all">
+                        Book Now
+                    </button>
+</div>
+<div class="md:col-span-6 bg-surface-container-low rounded-[2rem] p-8 flex flex-col justify-between hover:bg-surface-container-high transition-colors">
+<div>
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-4xl text-secondary" data-icon="thermostat">thermostat</span>
+<span class="text-2xl font-black text-primary">₹999</span>
+</div>
+<h4 class="text-2xl font-bold text-primary mb-2">Fever Profile</h4>
+<p class="text-on-surface-variant mb-6">Rapid screening for Malaria, Typhoid, and Dengue with complete CBC analysis.</p>
+</div>
+<button class="w-full py-4 border border-outline-variant rounded-xl font-bold text-primary hover:bg-primary hover:text-white transition-all">
+                        Book Now
+                    </button>
+</div>
+</div>
+</section>
+<!-- Test Catalog Section -->
+<section class="bg-surface-container-low rounded-[3rem] p-8 md:p-16">
+<div class="max-w-4xl mx-auto mb-16 text-center">
+<h2 class="text-4xl font-black text-primary mb-6">Comprehensive Test Directory</h2>
+<div class="relative group">
+<input class="w-full h-16 pl-14 pr-6 rounded-2xl bg-surface-container-lowest border-none shadow-sm focus:ring-2 focus:ring-secondary transition-all text-lg" placeholder="Search for tests (e.g. CBC, Vitamin D, Thyroid...)" type="text"/>
+<span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-outline text-2xl group-focus-within:text-secondary" data-icon="search">search</span>
+</div>
+<div class="mt-4 flex flex-wrap justify-center gap-3">
+<span class="px-4 py-1.5 rounded-full bg-white text-on-surface-variant text-sm font-medium border border-outline-variant/30">Total Tests: 170+</span>
+<span class="px-4 py-1.5 rounded-full bg-white text-on-surface-variant text-sm font-medium border border-outline-variant/30">NABL Accredited</span>
+<span class="px-4 py-1.5 rounded-full bg-white text-on-surface-variant text-sm font-medium border border-outline-variant/30">Home Collection Available</span>
+</div>
+</div>
+<!-- Custom Table -->
+<div class="bg-surface-container-lowest rounded-[2rem] overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high">
+<th class="px-8 py-5 text-sm font-bold text-primary tracking-wider uppercase">Test Name</th>
+<th class="px-8 py-5 text-sm font-bold text-primary tracking-wider uppercase">Turnaround Time</th>
+<th class="px-8 py-5 text-sm font-bold text-primary tracking-wider uppercase text-right">Price</th>
+<th class="px-8 py-5"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-6">
+<div class="font-bold text-primary">Complete Blood Count (CBC)</div>
+<div class="text-sm text-on-surface-variant">Haematology • 24 Parameters</div>
+</td>
+<td class="px-8 py-6 text-on-surface-variant">Same Day</td>
+<td class="px-8 py-6 text-right font-black text-secondary">₹299</td>
+<td class="px-8 py-6 text-right">
+<button class="text-primary font-bold text-sm hover:text-secondary flex items-center justify-end gap-1">
+                                        ADD <span class="material-symbols-outlined text-lg" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-6">
+<div class="font-bold text-primary">HbA1c (Glycosylated Hemoglobin)</div>
+<div class="text-sm text-on-surface-variant">Diabetes Monitoring</div>
+</td>
+<td class="px-8 py-6 text-on-surface-variant">12 Hours</td>
+<td class="px-8 py-6 text-right font-black text-secondary">₹450</td>
+<td class="px-8 py-6 text-right">
+<button class="text-primary font-bold text-sm hover:text-secondary flex items-center justify-end gap-1">
+                                        ADD <span class="material-symbols-outlined text-lg" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-6">
+<div class="font-bold text-primary">Vitamin D (25-Hydroxy)</div>
+<div class="text-sm text-on-surface-variant">Nutritional Deficiency</div>
+</td>
+<td class="px-8 py-6 text-on-surface-variant">24 Hours</td>
+<td class="px-8 py-6 text-right font-black text-secondary">₹1,200</td>
+<td class="px-8 py-6 text-right">
+<button class="text-primary font-bold text-sm hover:text-secondary flex items-center justify-end gap-1">
+                                        ADD <span class="material-symbols-outlined text-lg" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-6">
+<div class="font-bold text-primary">Lipid Profile</div>
+<div class="text-sm text-on-surface-variant">Cardiology • Cholesterol &amp; Fats</div>
+</td>
+<td class="px-8 py-6 text-on-surface-variant">12 Hours</td>
+<td class="px-8 py-6 text-right font-black text-secondary">₹650</td>
+<td class="px-8 py-6 text-right">
+<button class="text-primary font-bold text-sm hover:text-secondary flex items-center justify-end gap-1">
+                                        ADD <span class="material-symbols-outlined text-lg" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-6">
+<div class="font-bold text-primary">Liver Function Test (LFT)</div>
+<div class="text-sm text-on-surface-variant">Bio-chemistry</div>
+</td>
+<td class="px-8 py-6 text-on-surface-variant">12 Hours</td>
+<td class="px-8 py-6 text-right font-black text-secondary">₹700</td>
+<td class="px-8 py-6 text-right">
+<button class="text-primary font-bold text-sm hover:text-secondary flex items-center justify-end gap-1">
+                                        ADD <span class="material-symbols-outlined text-lg" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-8 text-center border-t border-surface-container">
+<button class="text-secondary font-bold hover:underline flex items-center justify-center gap-2 mx-auto">
+                        View All 170+ Tests 
+                        <span class="material-symbols-outlined" data-icon="arrow_downward">arrow_downward</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full rounded-t-[2rem] mt-20 bg-[#F1F4F9] dark:bg-slate-900">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto px-8 py-16">
+<div class="md:col-span-1">
+<div class="text-2xl font-black text-[#00103E] dark:text-white mb-4">ATDC</div>
+<p class="text-slate-500 dark:text-slate-400 body-lg leading-relaxed mb-6">
+                    Acharya Tulsi Diagnostic Centre: Precision technology meets compassionate care.
+                </p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined p-2 bg-white rounded-full text-primary" data-icon="facebook">social_leaderboard</span>
+<span class="material-symbols-outlined p-2 bg-white rounded-full text-primary" data-icon="mail">mail</span>
+</div>
+</div>
+<div>
+<h5 class="font-bold text-primary mb-6">Our Centers</h5>
+<ul class="space-y-4">
+<li><a class="text-slate-500 dark:text-slate-400 hover:translate-x-1 transition-transform duration-200 hover:text-[#00677D]" href="#">Udhna Branch</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:translate-x-1 transition-transform duration-200 hover:text-[#00677D]" href="#">Pandesara Branch</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:translate-x-1 transition-transform duration-200 hover:text-[#00677D]" href="#">Bhestan Branch</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:translate-x-1 transition-transform duration-200 hover:text-[#00677D]" href="#">Sachin Branch</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-primary mb-6">Quick Links</h5>
+<ul class="space-y-4">
+<li><a class="text-slate-500 dark:text-slate-400 hover:translate-x-1 transition-transform duration-200 hover:text-[#00677D]" href="#">Godadara Branch</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:translate-x-1 transition-transform duration-200 hover:text-[#00677D]" href="#">Privacy Policy</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:translate-x-1 transition-transform duration-200 hover:text-[#00677D]" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-primary mb-6">Contact Us</h5>
+<div class="space-y-4 text-slate-500">
+<p class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="phone_in_talk">phone_in_talk</span>
+                        +91 98765 43210
+                    </p>
+<p class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="location_on">location_on</span>
+                        Surat, Gujarat, India
+                    </p>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 py-8 border-t border-slate-200 dark:border-slate-800 text-center">
+<p class="text-slate-500 dark:text-slate-400 text-sm">© 2024 Acharya Tulsi Diagnostic Centre. All Rights Reserved.</p>
+</div>
+</footer>
+<!-- Floating Action Button (WhatsApp) -->
+<a class="fixed bottom-8 right-8 z-[60] bg-tertiary-fixed text-on-tertiary-fixed w-16 h-16 rounded-full flex items-center justify-center shadow-[0px_12px_32px_rgba(0,16,62,0.15)] hover:scale-110 active:scale-95 transition-all duration-300" href="https://wa.me/#">
+<span class="material-symbols-outlined text-3xl" data-icon="chat" style="font-variation-settings: 'FILL' 1;">chat</span>
+</a>
+</body></html>

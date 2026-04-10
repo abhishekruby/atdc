@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About Us | ATDC - Surat's Trusted Diagnostic Partner</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#b3ebff",
+                    "primary-fixed-dim": "#b5c4ff",
+                    "on-background": "#181c20",
+                    "surface-variant": "#e0e3e8",
+                    "outline-variant": "#c5c6d2",
+                    "primary-container": "#0a2463",
+                    "primary": "#00103e",
+                    "error-container": "#ffdad6",
+                    "secondary": "#00677d",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#6ff7f4",
+                    "secondary-container": "#50d9fe",
+                    "primary-fixed": "#dce1ff",
+                    "on-primary-fixed": "#00164d",
+                    "surface-bright": "#f7f9ff",
+                    "surface-container-low": "#f1f4f9",
+                    "on-secondary-fixed": "#001f27",
+                    "on-secondary": "#ffffff",
+                    "background": "#f7f9ff",
+                    "surface-container-high": "#e5e8ee",
+                    "on-surface": "#181c20",
+                    "outline": "#757681",
+                    "inverse-surface": "#2d3135",
+                    "tertiary": "#001818",
+                    "surface-container": "#ebeef3",
+                    "surface-tint": "#475b9c",
+                    "surface": "#f7f9ff",
+                    "on-tertiary-container": "#00a19f",
+                    "on-primary-fixed-variant": "#2e4382",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#4ddad8",
+                    "on-secondary-fixed-variant": "#004e5f",
+                    "on-tertiary-fixed-variant": "#00504f",
+                    "surface-container-highest": "#e0e3e8",
+                    "inverse-primary": "#b5c4ff",
+                    "on-primary-container": "#7a8ed2",
+                    "tertiary-container": "#002f2e",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#eef1f6",
+                    "surface-dim": "#d7dadf",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#444650",
+                    "on-tertiary-fixed": "#00201f",
+                    "on-secondary-container": "#005c70",
+                    "secondary-fixed-dim": "#4cd6fb",
+                    "error": "#ba1a1a",
+                    "surface-container-lowest": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9ff; color: #181c20; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(24px); }
+        .tonal-shift { background-color: #f1f4f9; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-6 h-20">
+<div class="text-xl font-bold text-[#00103E] dark:text-white">ATDC</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-inter text-sm font-medium tracking-tight text-slate-600 dark:text-slate-400 hover:text-[#00103E] dark:hover:text-white transition-all duration-300" href="#">Home</a>
+<a class="font-inter text-sm font-bold tracking-tight text-[#00677D] border-b-2 border-[#00677D] pb-1" href="#">About</a>
+<a class="font-inter text-sm font-medium tracking-tight text-slate-600 dark:text-slate-400 hover:text-[#00103E] dark:hover:text-white transition-all duration-300" href="#">Services</a>
+<a class="font-inter text-sm font-medium tracking-tight text-slate-600 dark:text-slate-400 hover:text-[#00103E] dark:hover:text-white transition-all duration-300" href="#">Doctors</a>
+<a class="font-inter text-sm font-medium tracking-tight text-slate-600 dark:text-slate-400 hover:text-[#00103E] dark:hover:text-white transition-all duration-300" href="#">Test Prices</a>
+<a class="font-inter text-sm font-medium tracking-tight text-slate-600 dark:text-slate-400 hover:text-[#00103E] dark:hover:text-white transition-all duration-300" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center gap-3 mr-4">
+<span class="material-symbols-outlined text-secondary" data-icon="call">call</span>
+<span class="material-symbols-outlined text-secondary" data-icon="mail">mail</span>
+<span class="material-symbols-outlined text-secondary" data-icon="schedule">schedule</span>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-xl font-medium text-sm hover:bg-primary-container transition-all active:scale-95">Book Appointment</button>
+</div>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section: Editorial Style -->
+<section class="relative overflow-hidden pt-16 pb-24 md:pt-24 md:pb-32">
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7 z-10">
+<span class="inline-block px-4 py-1.5 rounded-full bg-secondary-container/20 text-on-secondary-container text-xs font-bold tracking-widest uppercase mb-6">Established 1997</span>
+<h1 class="text-5xl md:text-7xl font-extrabold text-primary tracking-tighter leading-[1.1] mb-8">
+                        Surat's Trusted <br/>
+<span class="text-secondary">Diagnostic Partner</span> <br/>
+                        Since 1997
+                    </h1>
+<p class="text-body-lg text-on-surface-variant max-w-xl leading-relaxed mb-10 text-lg">
+                        Managed by the visionaries at <span class="font-semibold text-primary">Terapanth Yuvak Parishad, Udhna</span>, Acharya Tulsi Diagnostic Centre (ATDC) has been the cornerstone of medical precision in South Gujarat for over two decades.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<div class="flex items-center gap-3 bg-surface-container-low px-6 py-4 rounded-xl">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="verified_user">verified_user</span>
+<div>
+<p class="text-sm font-bold text-primary">NABL Accredited</p>
+<p class="text-xs text-on-surface-variant">Quality Guaranteed</p>
+</div>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-low px-6 py-4 rounded-xl">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="groups">groups</span>
+<div>
+<p class="text-sm font-bold text-primary">5M+ Patients</p>
+<p class="text-xs text-on-surface-variant">Trusted by Surat</p>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl shadow-primary/10">
+<img alt="Modern Laboratory" class="w-full h-full object-cover" data-alt="Modern medical laboratory with advanced diagnostic equipment and white clinical surfaces in soft bright natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvy0x0BDQSe-07RDx-gD6s_GHftmh5u0HXOX1r9DYKnu_4UR9tuNVni0aEeLkhx8UVBO5SM9P929ijLBTGuo_btqFHQ4uAsQrTj5WqFshO9cYuecInBFMHpJVYvgkvj1AeQ_4r0avPujzklv5x5G2cSUXA9SrjcicpihYm5eDVjPQAZsudsUkkIenYtqaij6iJEvukAtb-3Afh5ledzcA2ksjctykconWXqCp6lbhrJCPIOAnHi-dUk9U9JQRyLH-G9HGIi4Nc7oOc"/>
+</div>
+<div class="absolute -bottom-8 -left-8 bg-white p-8 rounded-xl shadow-xl max-w-[240px] hidden md:block">
+<p class="text-primary font-bold italic text-lg leading-snug">"Precision in every test, Care in every interaction."</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Mission Card Section: Glassmorphism -->
+<section class="tonal-shift py-24">
+<div class="max-w-7xl mx-auto px-6">
+<div class="relative bg-primary rounded-[3rem] p-12 md:p-20 overflow-hidden">
+<!-- Decorative patterns -->
+<div class="absolute top-0 right-0 w-96 h-96 bg-secondary/20 rounded-full blur-3xl -mr-20 -mt-20"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary-container/10 rounded-full blur-3xl -ml-20 -mb-20"></div>
+<div class="relative z-10 grid md:grid-cols-2 gap-16 items-center">
+<div>
+<h2 class="text-3xl md:text-5xl font-bold text-white mb-8 tracking-tight">Our Core Mission</h2>
+<p class="text-xl md:text-2xl text-primary-fixed-dim leading-relaxed font-light">
+                                "To make world-class diagnostics accessible to every family by combining cutting-edge technology with unwavering ethical standards and compassionate service."
+                            </p>
+</div>
+<div class="grid grid-cols-1 gap-6">
+<div class="bg-white/10 backdrop-blur-md p-8 rounded-xl border border-white/10">
+<h3 class="text-white font-bold text-xl mb-2">Transparency</h3>
+<p class="text-primary-fixed text-sm">Clear pricing and clinical reports with no hidden complexities.</p>
+</div>
+<div class="bg-white/10 backdrop-blur-md p-8 rounded-xl border border-white/10">
+<h3 class="text-white font-bold text-xl mb-2">Social Responsibility</h3>
+<p class="text-primary-fixed text-sm">Community-driven healthcare managed by Terapanth Yuvak Parishad.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Values Section: Bento Grid -->
+<section class="py-24 bg-surface">
+<div class="max-w-7xl mx-auto px-6">
+<div class="mb-16">
+<h2 class="text-4xl font-black text-primary tracking-tighter mb-4">The Values We Live By</h2>
+<p class="text-on-surface-variant max-w-2xl">Rooted in heritage, powered by innovation. Our values define how we treat every specimen and every soul.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Accuracy -->
+<div class="group bg-surface-container-lowest p-10 rounded-xl hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 border border-outline-variant/15">
+<div class="w-16 h-16 bg-secondary-container/30 rounded-xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-secondary text-4xl" data-icon="biotech">biotech</span>
+</div>
+<h3 class="text-2xl font-bold text-primary mb-4">Accuracy</h3>
+<p class="text-on-surface-variant leading-relaxed">
+                            Zero-compromise precision utilizing high-end automated systems from Roche, Siemens, and Abbott. Every result is double-validated by expert pathologists.
+                        </p>
+</div>
+<!-- Accessibility -->
+<div class="group bg-surface-container-lowest p-10 rounded-xl hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 border border-outline-variant/15">
+<div class="w-16 h-16 bg-secondary-container/30 rounded-xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-secondary text-4xl" data-icon="location_on">location_on</span>
+</div>
+<h3 class="text-2xl font-bold text-primary mb-4">Accessibility</h3>
+<p class="text-on-surface-variant leading-relaxed">
+                            With multiple branches across Surat including Udhna, Pandesara, and Bhestan, we bring professional diagnostics to your doorstep.
+                        </p>
+</div>
+<!-- Compassion -->
+<div class="group bg-surface-container-lowest p-10 rounded-xl hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 border border-outline-variant/15">
+<div class="w-16 h-16 bg-secondary-container/30 rounded-xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-secondary text-4xl" data-icon="favorite">favorite</span>
+</div>
+<h3 class="text-2xl font-bold text-primary mb-4">Compassion</h3>
+<p class="text-on-surface-variant leading-relaxed">
+                            Diagnostics can be stressful. Our staff is trained to provide a comforting environment, making your health journey smoother and more human.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Timeline Section -->
+<section class="tonal-shift py-24">
+<div class="max-w-7xl mx-auto px-6">
+<div class="text-center mb-20">
+<h2 class="text-4xl font-black text-primary tracking-tighter">Our Journey Through Time</h2>
+</div>
+<div class="relative">
+<!-- Vertical Line -->
+<div class="absolute left-1/2 -translate-x-1/2 h-full w-0.5 bg-outline-variant/30 hidden md:block"></div>
+<div class="space-y-20">
+<!-- 1997 -->
+<div class="relative flex flex-col md:flex-row items-center justify-between">
+<div class="md:w-[45%] mb-8 md:mb-0 text-right">
+<h4 class="text-4xl font-black text-secondary mb-2">1997</h4>
+<h5 class="text-xl font-bold text-primary mb-3">The Foundation</h5>
+<p class="text-on-surface-variant">Inception of ATDC at Udhna by Terapanth Yuvak Parishad with a vision to serve the underprivileged with high-quality healthcare.</p>
+</div>
+<div class="z-10 w-12 h-12 bg-primary rounded-full border-4 border-white flex items-center justify-center">
+<div class="w-3 h-3 bg-white rounded-full"></div>
+</div>
+<div class="md:w-[45%] hidden md:block"></div>
+</div>
+<!-- 2010 -->
+<div class="relative flex flex-col md:flex-row-reverse items-center justify-between">
+<div class="md:w-[45%] mb-8 md:mb-0 text-left">
+<h4 class="text-4xl font-black text-secondary mb-2">2010</h4>
+<h5 class="text-xl font-bold text-primary mb-3">Modernization Leap</h5>
+<p class="text-on-surface-variant">Introduction of full automation in biochemistry and hematology. Expanded our reach to Pandesara branch.</p>
+</div>
+<div class="z-10 w-12 h-12 bg-primary rounded-full border-4 border-white flex items-center justify-center">
+<div class="w-3 h-3 bg-white rounded-full"></div>
+</div>
+<div class="md:w-[45%] hidden md:block"></div>
+</div>
+<!-- 2024 -->
+<div class="relative flex flex-col md:flex-row items-center justify-between">
+<div class="md:w-[45%] mb-8 md:mb-0 text-right">
+<h4 class="text-4xl font-black text-secondary mb-2">Present</h4>
+<h5 class="text-xl font-bold text-primary mb-3">A Digital Health Ecosystem</h5>
+<p class="text-on-surface-variant">Expanding to 5 major locations in Surat with online report access and home collection services, maintaining 99.9% accuracy.</p>
+</div>
+<div class="z-10 w-12 h-12 bg-primary rounded-full border-4 border-white flex items-center justify-center">
+<div class="w-3 h-3 bg-white rounded-full"></div>
+</div>
+<div class="md:w-[45%] hidden md:block"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-24 bg-surface overflow-hidden">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col md:flex-row items-center gap-12 bg-surface-container-high rounded-[3rem] p-12 md:p-16 border border-outline-variant/10">
+<div class="flex-1">
+<h2 class="text-3xl md:text-5xl font-black text-primary tracking-tighter mb-6">Ready to prioritize your health?</h2>
+<p class="text-on-surface-variant text-lg mb-8">Schedule a home collection or visit one of our 5 specialized centers across Surat for an effortless diagnostic experience.</p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-xl font-bold hover:shadow-lg hover:shadow-primary/20 transition-all">Book Now</button>
+<button class="bg-transparent border-2 border-primary text-primary px-8 py-4 rounded-xl font-bold hover:bg-primary hover:text-white transition-all">View All Tests</button>
+</div>
+</div>
+<div class="w-full md:w-1/3">
+<div class="aspect-square rounded-2xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
+<img alt="Doctor Profile" class="w-full h-full object-cover" data-alt="Professional smiling doctor in a clinical setting with warm welcoming professional lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8LTjmAhBPKHxDanlPVVbWJ4HiKRz-N7wn3Vo-XiPk9eKp0E9ySOInnzdl6jsiE3iayriGzG5NLV-LV0R_xgXMi6kuLG0WPP-jb_ROGmNFuLeC2wV4knL6JNMfAFV9zfd-QUygrJ5LmWbfWS6nMz0BW769mjMVMUR_Tzc6ejb4vB3GC-7oOkLgse7o_l9LuUOQcEah6jV98czJsRkl74c3-QOSNnv2keT21OHJVyQ483C8pTxx_ESQfpuS8u6787Dp60K__Br6--tq"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating WhatsApp Button -->
+<a class="fixed bottom-8 right-8 z-[100] group" href="#">
+<div class="flex items-center gap-3">
+<div class="bg-white px-4 py-2 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity translate-x-4 group-hover:translate-x-0 hidden md:block">
+<p class="text-sm font-bold text-primary">Chat with us</p>
+</div>
+<div class="w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-[0px_12px_32px_rgba(37,211,102,0.3)] hover:scale-110 transition-transform cursor-pointer">
+<svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 24 24">
+<path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"></path>
+</svg>
+</div>
+</div>
+</a>
+<!-- Footer -->
+<footer class="w-full rounded-t-[2rem] mt-20 bg-[#F1F4F9] dark:bg-slate-900">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto px-8 py-16">
+<div class="md:col-span-1">
+<div class="text-2xl font-black text-[#00103E] dark:text-white mb-4">ATDC</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">
+                    Professional diagnostic services managed with a vision of care and transparency. Serving Surat since 1997.
+                </p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="facebook">social_leaderboard</span>
+<span class="material-symbols-outlined text-secondary" data-icon="share">share</span>
+</div>
+</div>
+<div class="md:col-span-1">
+<h4 class="font-bold text-primary mb-6">Our Branches</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-500 hover:translate-x-1 transition-transform duration-200 hover:text-[#00677D]" href="#">Udhna Branch</a></li>
+<li><a class="text-slate-500 hover:translate-x-1 transition-transform duration-200 hover:text-[#00677D]" href="#">Pandesara Branch</a></li>
+<li><a class="text-slate-500 hover:translate-x-1 transition-transform duration-200 hover:text-[#00677D]" href="#">Bhestan Branch</a></li>
+</ul>
+</div>
+<div class="md:col-span-1">
+<h4 class="font-bold text-primary mb-6">Support</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-500 hover:translate-x-1 transition-transform duration-200 hover:text-[#00677D]" href="#">Sachin Branch</a></li>
+<li><a class="text-slate-500 hover:translate-x-1 transition-transform duration-200 hover:text-[#00677D]" href="#">Godadara Branch</a></li>
+<li><a class="text-slate-500 hover:translate-x-1 transition-transform duration-200 hover:text-[#00677D]" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+<div class="md:col-span-1">
+<h4 class="font-bold text-primary mb-6">Newsletter</h4>
+<p class="text-sm text-slate-500 mb-4">Stay updated with our health camps and news.</p>
+<div class="flex bg-white rounded-xl p-1 shadow-sm overflow-hidden">
+<input class="bg-transparent border-none focus:ring-0 px-4 py-2 w-full text-sm" placeholder="Email address" type="email"/>
+<button class="bg-primary text-white p-2 rounded-lg">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 pb-12">
+<div class="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-slate-400 text-xs font-inter">© 2024 Acharya Tulsi Diagnostic Centre. All Rights Reserved.</p>
+<div class="flex gap-6">
+<a class="text-xs text-slate-400 hover:text-primary" href="#">Terms of Service</a>
+<a class="text-xs text-slate-400 hover:text-primary" href="#">Accessibility</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
