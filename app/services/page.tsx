@@ -67,7 +67,7 @@ export default function Services() {
             </p>
             <AnimatedReveal delay={0.2}>
               <div className="flex flex-wrap gap-4">
-                <Link href="/book" className="bg-white text-secondary px-8 py-4 rounded-xl font-bold hover:bg-secondary-fixed transition-colors flex items-center justify-center">Book a Collection</Link>
+                <Link href="/home-collection" className="bg-white text-secondary px-8 py-4 rounded-xl font-bold hover:bg-secondary-fixed transition-colors flex items-center justify-center">Book a Collection</Link>
                 <Link href="/test-prices" className="bg-secondary-container/20 text-white border border-white/20 px-8 py-4 rounded-xl font-bold backdrop-blur-sm flex items-center justify-center">View Sample Packages</Link>
               </div>
             </AnimatedReveal>

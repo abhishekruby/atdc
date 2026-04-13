@@ -112,13 +112,13 @@ export default function About() {
                 { year: '2010', title: 'Modernization Leap', pos: 'left', desc: 'Introduction of full automation in biochemistry and hematology. Expanded our reach to Pandesara branch.' },
                 { year: 'Present', title: 'A Digital Health Ecosystem', pos: 'right', desc: 'Expanding to 5 major locations in Surat with online report access and home collection services, maintaining 99.9% accuracy.' }
               ].map((t, i) => (
-                <AnimatedReveal key={i} delay={0.2} className={`relative flex flex-col md:flex-row${t.pos === 'left' ? '-reverse' : ''} items-center justify-between`}>
-                  <div className={`md:w-[45%] mb-8 md:mb-0 text-${t.pos}`}>
+                <AnimatedReveal key={i} delay={0.2} className={`relative flex flex-col items-center justify-between ${t.pos === 'left' ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
+                  <div className={`md:w-[45%] mb-8 md:mb-0 ${t.pos === 'left' ? 'md:text-right' : 'md:text-left'}`}>
                     <h4 className="text-4xl font-black text-secondary mb-2">{t.year}</h4>
                     <h5 className="text-xl font-bold text-primary mb-3">{t.title}</h5>
                     <p className="text-on-surface-variant">{t.desc}</p>
                   </div>
-                  <div className="z-10 w-12 h-12 bg-primary rounded-full border-4 border-white flex items-center justify-center">
+                  <div className="z-10 w-12 h-12 bg-primary rounded-full border-4 border-white flex items-center justify-center shrink-0">
                     <div className="w-3 h-3 bg-white rounded-full"></div>
                   </div>
                   <div className="md:w-[45%] hidden md:block"></div>

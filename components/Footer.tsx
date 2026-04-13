@@ -1,6 +1,15 @@
+'use client';
+
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function Footer() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <footer className="bg-[#F1F4F9] w-full rounded-t-[2rem] mt-20">
       <div className="max-w-7xl mx-auto px-6 md:px-8 pt-12 pb-8">
@@ -75,6 +84,10 @@ export default function Footer() {
                 <a href="tel:+912611234567" className="text-sm text-slate-500 hover:text-secondary transition-colors">+91 261 1234567</a>
               </div>
               <div className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-secondary text-[18px]">mail</span>
+                <a href="mailto:udhnatyp@gmail.com" className="text-sm text-slate-500 hover:text-secondary transition-colors">udhnatyp@gmail.com</a>
+              </div>
+              <div className="flex items-center gap-3">
                 <span className="material-symbols-outlined text-secondary text-[18px]">schedule</span>
                 <p className="text-sm text-slate-500">Mon – Sun: 7:00 AM – 9:00 PM</p>
               </div>
@@ -90,7 +103,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-slate-200 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-400">
-          <p>© {new Date().getFullYear()} Acharya Tulsi Diagnostic Centre. All Rights Reserved.</p>
+          <p>© {mounted ? new Date().getFullYear() : '2025'} Acharya Tulsi Diagnostic Centre. All Rights Reserved.</p>
           <div className="flex gap-4">
             <Link href="#" className="hover:text-secondary transition-colors">Privacy Policy</Link>
             <Link href="#" className="hover:text-secondary transition-colors">Terms of Service</Link>

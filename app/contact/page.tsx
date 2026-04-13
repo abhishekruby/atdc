@@ -1,5 +1,7 @@
 import AnimatedReveal from '@/components/AnimatedReveal';
 
+import ContactForm from '@/components/ContactForm';
+
 export const metadata = {
   title: 'Contact Us | ATDC',
 };
@@ -20,35 +22,7 @@ export default function Contact() {
         {/* Left: Contact Form */}
         <AnimatedReveal delay={0.1} className="lg:col-span-5 bg-surface-container-lowest p-8 md:p-12 rounded-[2rem] shadow-[0px_12px_32px_rgba(0,16,62,0.04)]">
           <h2 className="text-2xl font-bold text-primary mb-8 font-headline">Send us a Message</h2>
-          <form className="space-y-6">
-            <div className="grid grid-cols-1 gap-6">
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-primary/60 uppercase tracking-wider ml-1">Full Name</label>
-                <input className="w-full px-6 py-4 rounded-xl bg-surface-container-low border-none focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all text-on-surface placeholder:text-outline-variant outline-none" placeholder="John Doe" type="text" />
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-primary/60 uppercase tracking-wider ml-1">Email Address</label>
-                <input className="w-full px-6 py-4 rounded-xl bg-surface-container-low border-none focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all text-on-surface placeholder:text-outline-variant outline-none" placeholder="john@example.com" type="email" />
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-primary/60 uppercase tracking-wider ml-1">Subject</label>
-                <select className="w-full px-6 py-4 rounded-xl bg-surface-container-low border-none focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all text-on-surface outline-none">
-                  <option>Test Inquiry</option>
-                  <option>Home Collection</option>
-                  <option>Report Assistance</option>
-                  <option>General Feedback</option>
-                </select>
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-primary/60 uppercase tracking-wider ml-1">Message</label>
-                <textarea className="w-full px-6 py-4 rounded-xl bg-surface-container-low border-none focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all text-on-surface placeholder:text-outline-variant outline-none" placeholder="How can we help you today?" rows={5}></textarea>
-              </div>
-            </div>
-            <button className="w-full bg-primary text-on-primary py-5 rounded-xl font-bold text-lg hover:bg-primary-container transition-all flex items-center justify-center gap-2 group" type="button">
-              Send Message
-              <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">send</span>
-            </button>
-          </form>
+          <ContactForm />
         </AnimatedReveal>
 
         {/* Right: Branch Details */}
@@ -161,6 +135,36 @@ export default function Contact() {
               </AnimatedReveal>
             </div>
           </div>
+
+          {/* Email & Quick Contact Strip */}
+          <AnimatedReveal delay={0.65} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a
+              href="mailto:udhnatyp@gmail.com"
+              className="flex items-center gap-4 p-5 rounded-2xl bg-surface-container-low hover:bg-surface-container-high transition-all group"
+            >
+              <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center shrink-0 group-hover:bg-secondary/20 transition-all">
+                <span className="material-symbols-outlined text-secondary">mail</span>
+              </div>
+              <div>
+                <p className="text-xs font-bold text-primary/60 uppercase tracking-wider mb-0.5">Email Us</p>
+                <p className="text-sm font-semibold text-secondary">udhnatyp@gmail.com</p>
+              </div>
+            </a>
+            <a
+              href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=Hello%2C%20I%20would%20like%20to%20get%20in%20touch%20with%20your%20team.`}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-4 p-5 rounded-2xl bg-surface-container-low hover:bg-surface-container-high transition-all group"
+            >
+              <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center shrink-0 group-hover:bg-secondary/20 transition-all">
+                <span className="material-symbols-outlined text-secondary">chat</span>
+              </div>
+              <div>
+                <p className="text-xs font-bold text-primary/60 uppercase tracking-wider mb-0.5">WhatsApp</p>
+                <p className="text-sm font-semibold text-secondary">Chat with us instantly</p>
+              </div>
+            </a>
+          </AnimatedReveal>
 
           {/* Global Map Integration Placeholder */}
           <AnimatedReveal delay={0.7} className="w-full h-80 rounded-[2rem] overflow-hidden relative group">

@@ -37,7 +37,7 @@ export default function TestPrices() {
                 <span className="text-primary-fixed-dim line-through opacity-60">₹4,999</span>
               </div>
             </div>
-            <Link href="/book" className="relative z-10 bg-secondary-container text-on-secondary-container px-8 py-4 rounded-xl font-bold w-fit hover:bg-white transition-colors duration-300 inline-block text-center">
+            <Link href="/home-collection" className="relative z-10 bg-secondary-container text-on-secondary-container px-8 py-4 rounded-xl font-bold w-fit hover:bg-white transition-colors duration-300 inline-block text-center">
               Book Now
             </Link>
             <div className="absolute -right-10 -bottom-10 opacity-20 transform group-hover:scale-110 transition-transform duration-700">
@@ -51,18 +51,12 @@ export default function TestPrices() {
                 <h4 className="text-xl font-bold text-primary mb-1">Basic Blood Test</h4>
                 <p className="text-2xl font-black text-secondary">₹699</p>
               </div>
-              <Link href="/book" className="bg-white p-4 rounded-full shadow-sm group-hover:bg-primary group-hover:text-white transition-all inline-flex items-center justify-center">
-                <span className="material-symbols-outlined">add</span>
-              </Link>
             </AnimatedReveal>
             <AnimatedReveal delay={0.3} className="bg-surface-container-low rounded-[2rem] p-8 flex items-center justify-between group hover:bg-surface-container-high transition-colors h-full">
               <div>
                 <h4 className="text-xl font-bold text-primary mb-1">Diabetes Package</h4>
                 <p className="text-2xl font-black text-secondary">₹799</p>
               </div>
-              <Link href="/book" className="bg-white p-4 rounded-full shadow-sm group-hover:bg-primary group-hover:text-white transition-all inline-flex items-center justify-center">
-                <span className="material-symbols-outlined">add</span>
-              </Link>
             </AnimatedReveal>
           </div>
 
@@ -75,7 +69,7 @@ export default function TestPrices() {
               <h4 className="text-2xl font-bold text-primary mb-2">Hemoglobin Panel</h4>
               <p className="text-on-surface-variant mb-6">In-depth analysis of iron levels, RBC indices, and peripheral smear examination.</p>
             </div>
-            <Link href="/book" className="w-full py-4 border border-outline-variant rounded-xl font-bold text-primary hover:bg-primary hover:text-white transition-all block text-center">
+            <Link href="/home-collection" className="w-full py-4 border border-outline-variant rounded-xl font-bold text-primary hover:bg-primary hover:text-white transition-all block text-center">
               Book Now
             </Link>
           </AnimatedReveal>
@@ -89,7 +83,7 @@ export default function TestPrices() {
               <h4 className="text-2xl font-bold text-primary mb-2">Fever Profile</h4>
               <p className="text-on-surface-variant mb-6">Rapid screening for Malaria, Typhoid, and Dengue with complete CBC analysis.</p>
             </div>
-            <Link href="/book" className="w-full py-4 border border-outline-variant rounded-xl font-bold text-primary hover:bg-primary hover:text-white transition-all block text-center">
+            <Link href="/home-collection" className="w-full py-4 border border-outline-variant rounded-xl font-bold text-primary hover:bg-primary hover:text-white transition-all block text-center">
               Book Now
             </Link>
           </AnimatedReveal>

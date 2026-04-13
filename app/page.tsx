@@ -201,7 +201,7 @@ export default function Home() {
                     <p className="text-sm text-slate-400 line-through">{pkg.oldPrice}</p>
                     <p className="text-2xl font-black text-primary">{pkg.newPrice}</p>
                   </div>
-                  <Link href="/book" className="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-secondary transition-colors flex items-center justify-center">Book Now</Link>
+                  <Link href="/home-collection" className="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-secondary transition-colors flex items-center justify-center">Book Now</Link>
                 </div>
               </AnimatedReveal>
             ))}
