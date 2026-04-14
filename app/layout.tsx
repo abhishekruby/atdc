@@ -14,6 +14,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'ATDC - Acharya Tulsi Diagnostic Centre',
   description: 'Precision diagnostics you can trust. Serving Surat with excellence since 1997.',
+  icons: {
+    icon: '/logo.png',
+    apple: '/android-chrome-192x192.png',
+  },
 };
 
 export default function RootLayout({

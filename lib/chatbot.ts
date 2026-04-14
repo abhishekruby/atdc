@@ -90,17 +90,17 @@ const BRANCHES = [
 ];
 
 // ── Gemini AI context ─────────────────────────────────────────
-const SYSTEM_PROMPT = `You are the AI Assistant of Acharya Tulsi Diagnostic Centre (ATDC), Surat, Gujarat.
+const SYSTEM_PROMPT = `You are the AI Assistant of Acharya Tulsi Diagnostic Centre, Surat, Gujarat.
 
 PERSONALITY:
 - Speak in a highly professional, clinical, and respectful tone.
-- Do not use names like "Priya". You are "AI Assistant of ATDC".
+- Do not use names like "Priya". You are "AI Assistant of Acharya Tulsi Diagnostic Centre".
 - Maintain formal structure; avoid excessive emojis.
 - Provide clear, direct, and concise operational instructions.
 - If the user writes in Hindi or Gujarati, respond formally in that language without slang.
 - Keep responses concise but complete (under 150 words).
 
-ATDC FACTS:
+Acharya Tulsi Diagnostic Centre FACTS:
 - 5 branches in Surat: Udhna (HQ, 24/7), Pandesara (8AM-9PM), Bhestan, Sachin, Godadara.
 - Services: Pathology, Radiology, Cardiology, General checkup.
 - Phone: 0261-227-7119 | Email: udhnatyp@gmail.com
@@ -142,9 +142,9 @@ async function aiReply(userMsg: string, session: UserSession): Promise<string> {
 function keywordFallback(msg: string): string {
   const m = msg.toLowerCase();
   if (/hour|time|open|timing|schedule/.test(m))
-    return 'ATDC operating hours: Mon-Sun, 7 AM - 9 PM across all branches. The Udhna branch operates 24/7.';
+    return 'Acharya Tulsi Diagnostic Centre operating hours: Mon-Sun, 7 AM - 9 PM across all branches. The Udhna branch operates 24/7.';
   if (/home|visit|collect/.test(m))
-    return 'ATDC offers 24/7 home sample collection across Surat. Please type *home collection* to initiate a booking.';
+    return 'Acharya Tulsi Diagnostic Centre offers 24/7 home sample collection across Surat. Please type *home collection* to initiate a booking.';
   if (/price|cost|rate|charge|kitna/.test(m))
     return 'For test pricing, please visit our website at /test-prices or contact our support team at 0261-227-7119.';
   if (/branch|location|address|where|kahan/.test(m))
@@ -152,7 +152,7 @@ function keywordFallback(msg: string): string {
   if (/report|result/.test(m))
     return 'Reports are typically generated within 24 hours. Please retain your receipt for collection or call 0261-227-7119.';
   if (/doctor|specialist/.test(m))
-    return 'ATDC employs specialists in Pathology, Radiology, and Cardiology. Type *book* to schedule an appointment.';
+    return 'Acharya Tulsi Diagnostic Centre employs specialists in Pathology, Radiology, and Cardiology. Type *book* to schedule an appointment.';
   if (/email|mail/.test(m))
     return 'You may reach us via email at udhnatyp@gmail.com. We intend to respond within 1 business day.';
   if (/contact|phone|call|number/.test(m))
@@ -161,19 +161,19 @@ function keywordFallback(msg: string): string {
 }
 
 function branchList(): string {
-  return `ATDC operates 5 branches across Surat:\n\n` +
+  return `Acharya Tulsi Diagnostic Centre operates 5 branches across Surat:\n\n` +
     BRANCHES.map(b => `📍 *${b.name}*\n${b.addr}\n🗺 ${b.map}`).join('\n\n') +
     `\n\nCentral Helpline: 0261-227-7119`;
 }
 
 function welcomeMsg(lang: Language): string {
   if (lang === 'hindi')
-    return `नमस्ते। मैं ATDC की AI असिस्टेंट हूं। मैं हिंदी, अंग्रेजी और गुजराती में बात कर सकती हूं।\n\nकृप्या अपनी जरूरत चुनें:\n\n📅 अपॉइंटमेंट बुक करें – *book* टाइप करें\n🏠 होम कलेक्शन – *home collection* टाइप करें\n✉️ संपर्क करें – *contact request* टाइप करें\n📍 हमारी ब्रांच – *branches* टाइप करें\n\nआप हमारी सेवाओं से संबंधित कोई भी सामान्य प्रश्न सीधे लिखकर पूछ सकते हैं।`;
+    return `नमस्ते। मैं आचार्य तुलसी डायग्नोस्टिक सेंटर की AI असिस्टेंट हूं। मैं हिंदी, अंग्रेजी और गुजराती में बात कर सकती हूं।\n\nकृप्या अपनी जरूरत चुनें:\n\n📅 अपॉइंटमेंट बुक करें – *book* टाइप करें\n🏠 होम कलेक्शन – *home collection* टाइप करें\n✉️ संपर्क करें – *contact request* टाइप करें\n📍 हमारी ब्रांच – *branches* टाइप करें\n\nआप हमारी सेवाओं से संबंधित कोई भी सामान्य प्रश्न सीधे लिखकर पूछ सकते हैं।`;
   if (lang === 'gujarati')
-    return `નમસ્તે. હું ATDC ની AI આસિસ્ટન્ટ છું. હું ગુજરાતી, હિન્દી અને અંગ્રેજીમાં વાત કરી શકું છું.\n\nકૃપા કરીને તમારી જરૂરિયાત પસંદ કરો:\n\n📅 અપોઇન્ટમેન્ટ – *book* ટાઇપ કરો\n🏠 હોમ કલેક્શન – *home collection* ટાઇપ કરો\n✉️ સંપર્ક – *contact request* ટાઇપ કરો\n📍 અમારી શાખાઓ – *branches* ટાઇપ કરો\n\nતમે અમારી સેવાઓ વિશેના અન્ય સામાન્ય પ્રશ્નો પણ સીધા ટાઇપ કરીને પૂછી શકો છો.`;
+    return `નમસ્તે. હું આચાર્ય તુલસી ડાયગ્નોસ્ટિક સેન્ટરની AI આસિસ્ટન્ટ છું. હું ગુજરાતી, હિન્દી અને અંગ્રેજીમાં વાત કરી શકું છું.\n\nકૃપા કરીને તમારી જરૂરિયાત પસંદ કરો:\n\n📅 અપોઇન્ટમેન્ટ – *book* ટાઇપ કરો\n🏠 હોમ કલેક્શન – *home collection* ટાઇપ કરો\n✉️ સંપર્ક – *contact request* ટાઇપ કરો\n📍 અમારી શાખાઓ – *branches* ટાઇપ કરો\n\nતમે અમારી સેવાઓ વિશેના અન્ય સામાન્ય પ્રશ્નો પણ સીધા ટાઇપ કરીને પૂછી શકો છો.`;
   if (lang === 'hinglish')
-    return `Namaste. Main ATDC ki AI Assistant hoon. Main English, Hindi aur Gujarati mein baat kar sakti hoon.\n\nKripya apni zaroorat chunen:\n\n📅 Appointment – *book* likhein\n🏠 Home collection – *home collection* likhein\n✉️ Contact Request – *contact request* likhein\n📍 Branches – *branches* likhein\n\nAap hamari services ke bare mein koi bhi general sawal ya inquiry bhi likh kar poochh sakte hain.`;
-  return `Hello. I am the AI Assistant for ATDC. I can converse in English, Hindi, and Gujarati.\n\nHow may I assist you today?\n\n📅 *Book appointment* – type "book"\n🏠 *Home collection* – type "home collection"\n✉️ *Contact Request* – type "contact request"\n📍 *Find a branch* – type "branches"\n\nYou may also ask me any general questions regarding our services by typing them directly.`;
+    return `Namaste. Main Acharya Tulsi Diagnostic Centre ki AI Assistant hoon. Main English, Hindi aur Gujarati mein baat kar sakti hoon.\n\nKripya apni zaroorat chunen:\n\n📅 Appointment – *book* likhein\n🏠 Home collection – *home collection* likhein\n✉️ Contact Request – *contact request* likhein\n📍 Branches – *branches* likhein\n\nAap hamari services ke bare mein koi bhi general sawal ya inquiry bhi likh kar poochh sakte hain.`;
+  return `Hello. I am the AI Assistant for Acharya Tulsi Diagnostic Centre. I can converse in English, Hindi, and Gujarati.\n\nHow may I assist you today?\n\n📅 *Book appointment* – type "book"\n🏠 *Home collection* – type "home collection"\n✉️ *Contact Request* – type "contact request"\n📍 *Find a branch* – type "branches"\n\nYou may also ask me any general questions regarding our services by typing them directly.`;
 }
 
 // ── Date parsing & validation ────────────────────────────────
@@ -241,7 +241,7 @@ export async function handleUserMessage(phone: string, text: string): Promise<st
     return branchList();
   }
   if (/\btiming|open|hours?\b/i.test(msgLower) && session.state === 'IDLE') {
-    return '🕐 *ATDC Branch Timings:*\n\n• *Udhna (Main):* Open 24/7\n• All other branches: *7:00 AM – 9:00 PM*, Mon–Sun\n\nNeed directions? Type *branches* for maps! 📍';
+    return '🕐 *Acharya Tulsi Diagnostic Centre Branch Timings:*\n\n• *Udhna (Main):* Open 24/7\n• All other branches: *7:00 AM – 9:00 PM*, Mon–Sun\n\nNeed directions? Type *branches* for maps! 📍';
   }
   if (/\bcontact\b/i.test(msgLower) && session.state === 'IDLE') {
     return '📞 *0261-227-7119*\n📧 *udhnatyp@gmail.com*\n🌐 Website: /contact\n\nOr visit any of our 5 branches — we\'d love to see you! 😊';

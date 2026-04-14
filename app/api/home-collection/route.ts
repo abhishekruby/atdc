@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { appendHomeCollection } from '@/lib/sheets';
-import { sendWhatsAppMessage } from '@/lib/whatsapp';
+import { sendWhatsAppMessage, sendHomeCollectionAcknowledgement } from '@/lib/whatsapp';
 
 export async function POST(request: Request) {
   try {
@@ -45,6 +45,13 @@ export async function POST(request: Request) {
       } catch (e) {
         console.error('WhatsApp notify error:', e);
       }
+    }
+
+    // Notify user via WhatsApp
+    try {
+      await sendHomeCollectionAcknowledgement(phone, name, tests || 'Not specified', date, timeSlot);
+    } catch (userWsError) {
+      console.error('Failed to send home collection user acknowledgement:', userWsError);
     }
 
     return NextResponse.json({

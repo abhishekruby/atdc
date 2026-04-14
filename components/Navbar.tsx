@@ -20,14 +20,14 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 w-full z-50 glass-nav bg-white/90 backdrop-blur-xl shadow-sm transition-all duration-300">
-      <div className="flex justify-between items-center max-w-7xl mx-auto px-4 md:px-6 h-20">
+      <div className="flex justify-between items-center max-w-7xl mx-auto px-4 md:px-6 h-28">
         
         {/* Logo */}
         <Link href="/" className="flex items-center shrink-0">
           <img
-            src="/logo.png"
+            src="/logo-transparent.png"
             alt="Acharya Tulsi Diagnostic Centre"
-            className="h-14 w-auto object-contain"
+            className="h-24 w-auto object-contain"
           />
         </Link>
 

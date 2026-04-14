@@ -19,9 +19,9 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="sm:col-span-2 lg:col-span-1">
             <img
-              src="/logo.png"
+              src="/logo-transparent.png"
               alt="ATDC Full Logo"
-              className="h-20 w-auto object-contain mb-4"
+              className="h-40 w-auto object-contain mb-4"
             />
             <p className="text-slate-500 text-sm leading-relaxed max-w-xs">
               Precision diagnostics you can trust. Serving Surat with excellence since 1997.

@@ -22,22 +22,22 @@ export async function POST(request: Request) {
     // Route logic based on sheet (Appointment vs Home Collection)
     if (sheetName === 'Appointments') {
       if (status === 'Confirmed') {
-        notificationText = `✅ *Appointment Confirmed!*\n\nHello ${patientName},\nYour appointment for ${date} during ${slot} is confirmed.\n\nSee you soon at ATDC! 🏥📍`;
+        notificationText = `✅ *Appointment Confirmed!*\n\nHello ${patientName},\nYour appointment for ${date} during ${slot} is confirmed.\n\nSee you soon at Acharya Tulsi Diagnostic Centre! 🏥📍`;
       } else {
         notificationText = `❌ *Appointment Update*\n\nHello ${patientName},\nUnfortunately, we had to reject your appointment request for ${date} during ${slot}.\n\nPlease call us at 0261-227-7119 to reschedule. Apologies for the inconvenience.`;
       }
     } else if (sheetName === 'Home Collection') {
       if (status === 'Confirmed') {
-        notificationText = `🏠✅ *Home Collection Confirmed!*\n\nHello ${patientName},\nYour home collection for ${date} during ${slot} is confirmed. Our phlebotomist will arrive as scheduled.\n\nThank you for choosing ATDC! 💉`;
+        notificationText = `🏠✅ *Home Collection Confirmed!*\n\nHello ${patientName},\nYour home collection for ${date} during ${slot} is confirmed. Our phlebotomist will arrive as scheduled.\n\nThank you for choosing Acharya Tulsi Diagnostic Centre! 💉`;
       } else {
         notificationText = `🏠❌ *Home Collection Update*\n\nHello ${patientName},\nUnfortunately, we cannot fulfill your home collection request for ${date} during ${slot}.\n\nPlease call us at 0261-227-7119 to reschedule. Apologies for the inconvenience.`;
       }
     } else {
       // Fallback for unknown sheets
       if (status === 'Confirmed') {
-        notificationText = `✅ Hello ${patientName}, your request for ${date} has been Confirmed by ATDC!`;
+        notificationText = `✅ Hello ${patientName}, your request for ${date} has been Confirmed by Acharya Tulsi Diagnostic Centre!`;
       } else {
-        notificationText = `❌ Hello ${patientName}, your request for ${date} has been Rejected by ATDC. Please call 0261-227-7119.`;
+        notificationText = `❌ Hello ${patientName}, your request for ${date} has been Rejected by Acharya Tulsi Diagnostic Centre. Please call 0261-227-7119.`;
       }
     }
 

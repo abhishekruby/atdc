@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { appendContactMessage } from '@/lib/sheets';
+import { sendWhatsAppMessage, sendContactAcknowledgement } from '@/lib/whatsapp';
 
 export async function POST(request: Request) {
   try {
@@ -22,6 +23,32 @@ export async function POST(request: Request) {
       subject: subject || 'General Inquiry',
       message
     });
+
+    // Notify admin via WhatsApp
+    const adminNumber = process.env.ADMIN_WHATSAPP_NUMBER;
+    if (adminNumber) {
+      const adminMsg = 
+        `📬 *New Contact Form Submission*\n\n` +
+        `👤 *Name:* ${name}\n` +
+        `📞 *Phone:* ${phone}\n` +
+        `✉️ *Email:* ${email}\n` +
+        `📌 *Subject:* ${subject || 'General Inquiry'}\n` +
+        `💬 *Message:* ${message}\n\n` +
+        `Please reach out to the user to address their inquiry.`;
+
+      try {
+        await sendWhatsAppMessage(adminNumber, { type: 'text', text: { body: adminMsg } });
+      } catch (e) {
+        console.error('Failed to send contact admin notification:', e);
+      }
+    }
+
+    // Send Acknowledgement to User via WhatsApp
+    try {
+      await sendContactAcknowledgement(phone, name);
+    } catch (userWsError) {
+      console.error('Failed to send user acknowledgement:', userWsError);
+    }
 
     return NextResponse.json({
       success: true,
