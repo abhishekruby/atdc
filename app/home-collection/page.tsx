@@ -236,7 +236,7 @@ export default function HomeCollectionPage() {
             <div className="relative z-10">
               <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" className="w-8 h-8 invert mb-3" />
               <h3 className="text-xl font-bold mb-2">Book via WhatsApp</h3>
-              <p className="text-white/85 text-sm mb-4">Even faster — just message us and our assistant Priya will schedule your home collection.</p>
+              <p className="text-white/85 text-sm mb-4">Even faster — just message our AI Receptionist and your home collection will be scheduled instantly.</p>
               <a href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=Hello%2C%20I%20would%20like%20to%20book%20a%20home%20collection.`}
                 target="_blank" rel="noreferrer"
                 className="inline-block bg-white text-[#25D366] px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-green-50 transition-all">

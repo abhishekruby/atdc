@@ -49,7 +49,8 @@ function detectLanguage(text: string): Language {
   if (/[\u0A80-\u0AFF]/.test(text)) return 'gujarati';
   const hinglish = ['kya', 'hai', 'mujhe', 'haan', 'nahi', 'acha', 'theek', 'chalega',
     'chahiye', 'bhai', 'yaar', 'sahi', 'kal', 'aaj', 'me', 'mera', 'karo', 'batao',
-    'kitna', 'kab', 'kaise', 'kyun', 'thoda', 'accha', 'bilkul'];
+    'kitna', 'kab', 'kaise', 'kyun', 'thoda', 'accha', 'bilkul', 'sorry', 'nhi', 'nai',
+    'aana', 'jana', 'dena', 'lena', 'kar', 'ho', 'gaya', 'raha', 'toh', 'bhi'];
   const words = text.toLowerCase().split(/\s+/);
   return words.some(w => hinglish.includes(w)) ? 'hinglish' : 'english';
 }
@@ -215,6 +216,132 @@ function parseInputDate(input: string, maxAdvanceDays: number): string | null | 
 }
 
 // ═══════════════════════════════════════════════════════════════
+// Intent Detection Helpers
+// ═══════════════════════════════════════════════════════════════
+
+// Words/phrases that are clearly NOT a person's name
+const FLOW_KEYWORDS = /\b(book|appointment|appoint|home\s*collection|home|collect|pickup|contact\s*request|contact|cancel|reset|stop|branches|branch|hi|hello|hey|namaste|menu|help)\b/i;
+
+/**
+ * Detect if user wants to switch flow mid-conversation.
+ * Returns 'appt' | 'hc' | 'cr' | 'cancel' | null
+ */
+function detectFlowSwitch(msg: string): 'appt' | 'hc' | 'cr' | 'cancel' | null {
+  const m = msg.toLowerCase().trim();
+
+  if (/^(reset|cancel|restart|stop|quit|exit|main menu|menu)$/i.test(m)) return 'cancel';
+
+  // Home collection intent — including "I can't come", "no legs", "ghar pe", etc.
+  if (/home\s*collection|ghar\s*(pe|par|collection)|sample\s*pickup|pickup|chalke nahi|nahi aa sakta|nai aa sakta|legs|pahunch\s*nahi|aa\s*nahi sakta|nahi\s*ja\s*sakta|can['']?t come|cannot come|don['']?t have.*leg|no.*(leg|transport)|ghar.*(test|blood|sample)/i.test(m)) {
+    return 'hc';
+  }
+
+  // Appointment booking intent
+  if (/\bbook\b|appointment|appoint|schedule\b|reserve\b/i.test(m) && !/home|ghar|collect|pickup/i.test(m)) {
+    return 'appt';
+  }
+
+  // Contact request intent
+  if (/\bcontact\s*request\b|inquiry\b/i.test(m)) {
+    return 'cr';
+  }
+
+  return null;
+}
+
+/**
+ * Try to extract a 10-digit phone number from a correction sentence.
+ * e.g. "sorry mera number 9876543210 hai" → "9876543210"
+ */
+function extractPhoneFromCorrection(text: string): string | null {
+  const digits = text.replace(/\D/g, '');
+  if (digits.length >= 10) {
+    // Take last 10 digits to handle country codes like 91XXXXXXXXXX
+    return digits.slice(-10);
+  }
+  return null;
+}
+
+/**
+ * Returns true if the text looks like a correction to a previous answer.
+ * e.g. "sorry", "nhi", "wait", "actually", "mistake", "galat"
+ */
+function isCorrectionIntent(text: string): boolean {
+  return /sorry|nhi|nahi|wait|actually|mistake|galat|sahi|correction|correct|change|badal|alag|different/i.test(text);
+}
+
+/**
+ * Check if a message looks like a general question / off-topic (not a booking step answer)
+ * and we're in a flow step.
+ */
+function isGeneralQuestion(text: string): boolean {
+  return /report|result|price|cost|rate|timing|hour|open|close|branch|location|doctor|test\b|kab\s*milega|kab\s*aayega|kitne\s*(din|time|ghante)|kab\s*tak/i.test(text);
+}
+
+/**
+ * Get a quick inline answer for common questions (used mid-flow)
+ */
+function quickAnswer(text: string): string | null {
+  const m = text.toLowerCase();
+  if (/report|result|kab\s*milega|kab\s*aayega/.test(m))
+    return '📋 Reports are typically ready within 24 hours. You can collect them with your receipt, or call *0261-227-7119*.';
+  if (/price|cost|rate|kitna/.test(m))
+    return '💰 For test pricing, please call *0261-227-7119* or visit the Test Prices page on our website.';
+  if (/timing|open|hour|close/.test(m))
+    return '🕐 All branches open 7 AM – 9 PM, Mon–Sun. Udhna branch is *open 24/7*.';
+  if (/branch|location|kahan/.test(m))
+    return branchList();
+  if (/doctor|specialist/.test(m))
+    return '👨‍⚕️ We have specialists in Pathology, Radiology, and Cardiology at all branches.';
+  return null;
+}
+
+// ── Current step re-prompt messages ──────────────────────────
+function reprompt(state: ChatState, lang: Language, data: Record<string, string>): string {
+  switch (state) {
+    case 'APPT_NAME':
+    case 'HC_NAME':
+    case 'CR_NAME':
+      return lang === 'hindi' ? 'कृपया अपना पूरा नाम बताएं।'
+        : lang === 'hinglish' ? 'Kripya apna poora naam batayein.'
+        : 'Please provide your *full name*.';
+    case 'APPT_PHONE':
+    case 'HC_PHONE':
+    case 'CR_PHONE':
+      return lang === 'hindi' ? 'कृपया अपना 10 अंकों का फोन नंबर बताएं।'
+        : lang === 'hinglish' ? 'Kripya apna 10 digit phone number dijiye.'
+        : 'Please provide your *10-digit phone number*.';
+    case 'APPT_DEPT':
+      return lang === 'hindi' ? 'कृपया 1, 2, 3 या 4 में से विभाग चुनें।\n\n1️⃣ पैथोलॉजी\n2️⃣ रेडियोलॉजी\n3️⃣ कार्डियोलॉजी\n4️⃣ सामान्य जांच'
+        : 'Please select your department:\n\n1️⃣ Pathology\n2️⃣ Radiology\n3️⃣ Cardiology\n4️⃣ General checkup';
+    case 'APPT_DATE':
+    case 'HC_DATE':
+      return lang === 'hindi' ? 'कृपया तारीख बताएं (DD/MM/YYYY या \'आज\'/\'कल\')'
+        : lang === 'hinglish' ? 'Date batayein (DD/MM/YYYY ya \'today\'/\'tomorrow\')'
+        : 'Please provide a date (DD/MM/YYYY or \'today\'/\'tomorrow\').';
+    case 'APPT_SLOT':
+      return lang === 'hinglish' ? 'Time slot chunein: 1️⃣ Morning  2️⃣ Afternoon  3️⃣ Evening'
+        : 'Please choose a time slot:\n1️⃣ Morning (9 AM – 12 PM)\n2️⃣ Afternoon (1 PM – 4 PM)\n3️⃣ Evening (5 PM – 8 PM)';
+    case 'HC_ADDRESS':
+      return lang === 'hinglish' ? 'Kripya apna poora address batayein (area aur landmark ke saath).'
+        : 'Please provide your complete address (area + landmark).';
+    case 'HC_TESTS':
+      return lang === 'hinglish' ? 'Kaunse tests chahiye? (e.g. Blood Sugar, CBC). Pata nahi toh "not sure" likhein.'
+        : 'Which tests are needed? (e.g. CBC, Blood Sugar). If unsure, type "not sure".';
+    case 'HC_TIME':
+      return lang === 'hinglish' ? 'Time slot chunein: 1️⃣ Subah  2️⃣ Dopahar  3️⃣ Sham'
+        : 'Please choose a time slot:\n1️⃣ Morning (8 AM – 11 AM)\n2️⃣ Mid-day (11 AM – 2 PM)\n3️⃣ Afternoon (2 PM – 5 PM)';
+    case 'CR_EMAIL':
+      return 'Please provide your email address, or type \'skip\'.';
+    case 'CR_MSG':
+      return lang === 'hinglish' ? 'Apna message ya inquiry detail mein likhein.'
+        : 'Please type your detailed message or inquiry.';
+    default:
+      return welcomeMsg(lang);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
 // Main Handler
 // ═══════════════════════════════════════════════════════════════
 export async function handleUserMessage(phone: string, text: string): Promise<string> {
@@ -228,74 +355,123 @@ export async function handleUserMessage(phone: string, text: string): Promise<st
   }
   const lang = (session.lang !== 'english') ? session.lang : detectedLang;
 
-  // ── Global shortcuts ───────────────────────────────────────
+  // ── Global shortcuts (always work regardless of state) ─────
   if (/^(reset|cancel|restart|stop|quit|exit)$/i.test(msgLower)) {
     resetSession(phone);
-    return 'Session reset successfully. Type *hi* to view the main menu.';
+    return lang === 'hindi' ? '✅ सत्र रीसेट हो गया। *hi* टाइप करें।'
+      : lang === 'hinglish' ? '✅ Session reset ho gaya. *hi* type karein.'
+      : '✅ Session reset. Type *hi* to see the main menu.';
   }
+
   if (/^(hi|hii|hiii|hello|hey|namaste|namaskar|kem cho|start|menu|help)$/i.test(msgLower)) {
     updateSession(phone, { lang, state: 'IDLE', data: {} });
     return welcomeMsg(lang);
   }
-  if (/\bbranche?s?\b|locations?|kahan|branches/i.test(msgLower) && session.state === 'IDLE') {
-    return branchList();
-  }
-  if (/\btiming|open|hours?\b/i.test(msgLower) && session.state === 'IDLE') {
-    return '🕐 *Acharya Tulsi Diagnostic Centre Branch Timings:*\n\n• *Udhna (Main):* Open 24/7\n• All other branches: *7:00 AM – 9:00 PM*, Mon–Sun\n\nNeed directions? Type *branches* for maps! 📍';
-  }
-  if (/\bcontact\b/i.test(msgLower) && session.state === 'IDLE') {
-    return '📞 *0261-227-7119*\n📧 *udhnatyp@gmail.com*\n🌐 Website: /contact\n\nOr visit any of our 5 branches — we\'d love to see you! 😊';
+
+  // ── IDLE state: detect intent and route ───────────────────
+  if (session.state === 'IDLE') {
+    if (/\bbranche?s?\b|locations?|kahan|branches/i.test(msgLower)) return branchList();
+    if (/\btiming|open|hours?\b/i.test(msgLower))
+      return '🕐 *Acharya Tulsi Diagnostic Centre Branch Timings:*\n\n• *Udhna (Main):* Open 24/7\n• All other branches: *7:00 AM – 9:00 PM*, Mon–Sun\n\nNeed directions? Type *branches* for maps! 📍';
+    if (/\bcontact\b/i.test(msgLower) && !/request|inquiry/i.test(msgLower))
+      return '📞 *0261-227-7119*\n📧 *udhnatyp@gmail.com*\n🌐 Website: /contact\n\nOr visit any of our 5 branches — we\'d love to see you! 😊';
+
+    // Home collection — expanded triggers including "I can't come / no transport / nahi aana"
+    if (/home\s*collection|ghar\s*(pe|par|collection)|sample\s*pickup|pickup|nahi\s*aa\s*sakta|nai\s*aa\s*sakta|can['']?t come|cannot come|don['']?t have.*leg|no.*(leg|transport)|legs\b|ghar.*(test|blood|sample)|aa\s*nahi|chalke\s*nahi|nahi\s*ja\s*sakta/i.test(msgLower)) {
+      updateSession(phone, { state: 'HC_NAME', data: {} });
+      if (lang === 'hindi') return `होम कलेक्शन अनुरोध शुरू कर रहे हैं।\n\nकृपया अपना पूरा नाम बताएं।`;
+      if (lang === 'hinglish') return `Home collection request initiate kar rahe hain.\n\nKripya apna poora naam batayein.`;
+      return `Initiating home collection request.\n\nPlease provide your *full name*.`;
+    }
+
+    // Appointment booking
+    if (/\bbook\b|appointment|appoint|schedule\b|reserve\b/i.test(msgLower) && !/home|ghar|collect|pickup/i.test(msgLower)) {
+      updateSession(phone, { state: 'APPT_NAME', data: {} });
+      if (lang === 'hindi') return `अपॉइंटमेंट बुकिंग शुरू कर रहे हैं।\n\nकृपया अपना पूरा नाम बताएं।`;
+      if (lang === 'hinglish') return `Appointment booking initiate kar rahe hain.\n\nKripya apna poora naam batayein.`;
+      return `Initiating appointment booking.\n\nPlease provide your *full name*.`;
+    }
+
+    // Contact request
+    if (/\bcontact\s*request\b|\binquiry\b/i.test(msgLower)) {
+      updateSession(phone, { state: 'CR_NAME', data: {} });
+      if (lang === 'hindi') return `आपका संपर्क अनुरोध शुरू कर रहे हैं।\n\nकृपया अपना पूरा नाम बताएं।`;
+      if (lang === 'hinglish') return `Aapka contact request initiate kar rahe hain.\n\nKripya apna poora naam batayein.`;
+      return `Initiating your contact request.\n\nPlease specify your *full name*.`;
+    }
+
+    // General AI response
+    return await aiReply(text, session);
   }
 
-  // ── Trigger: appointment booking ───────────────────────────
-  if ((session.state === 'IDLE') && /\bbook\b|appointment|appoint|ment|schedule|reserve/i.test(msgLower)
-      && !/home|ghar|collect|pickup/i.test(msgLower)) {
-    updateSession(phone, { state: 'APPT_NAME', data: {} });
-    if (lang === 'hindi')
-      return `अपॉइंटमेंट बुकिंग शुरू कर रहे हैं।\n\nकृपया अपना पूरा नाम बताएं।`;
-    if (lang === 'hinglish')
-      return `Appointment booking initiate kar rahe hain.\n\nKripya apna poora naam batayein.`;
-    return `Initiating appointment booking.\n\nPlease provide your *full name*.`;
-  }
+  // ═══ Active flow: mid-flow intelligence ═══════════════════
 
-  // ── Trigger: home collection ───────────────────────────────
-  if ((session.state === 'IDLE') && /home|ghar|collect|pickup|visit|aana|sample|nahi aana|nai aana/i.test(msgLower)) {
-    updateSession(phone, { state: 'HC_NAME', data: {} });
-    if (lang === 'hindi')
-      return `होम कलेक्शन अनुरोध शुरू कर रहे हैं।\n\nकृपया अपना पूरा नाम बताएं।`;
-    if (lang === 'hinglish')
-      return `Home collection request initiate kar rahe hain.\n\nKripya apna poora naam batayein.`;
-    return `Initiating home collection request.\n\nPlease provide your *full name*.`;
-  }
-
-  // ── Trigger: contact request ───────────────────────────────
-  if ((session.state === 'IDLE') && /\bcontact\b|inquiry|request/i.test(msgLower) && !/book|home/i.test(msgLower)) {
-    updateSession(phone, { state: 'CR_NAME', data: {} });
-    if (lang === 'hindi') return `आपका संपर्क अनुरोध शुरू कर रहे हैं।\n\nकृपया अपना पूरा नाम बताएं।`;
-    if (lang === 'hinglish') return `Aapka contact request initiate kar rahe hain.\n\nKripya apna poora naam batayein.`;
-    return `Initiating your contact request.\n\nPlease specify your *full name*.`;
-  }
-
-  // ═══ State machine ════════════════════════════════════════
   const { state, data } = session;
+
+  // 1. Mid-flow: check if user wants to switch to a completely different flow
+  //    (only trigger if NOT in a step that could match this by coincidence)
+  const flowSwitch = detectFlowSwitch(text);
+  if (flowSwitch && state !== 'IDLE') {
+    if (flowSwitch === 'cancel') {
+      resetSession(phone);
+      return lang === 'hindi' ? '✅ बुकिंग रद्द कर दी गई। *hi* टाइप करें।'
+        : lang === 'hinglish' ? '✅ Booking cancel kar di. *hi* type karein.'
+        : '✅ Booking cancelled. Type *hi* to start over.';
+    }
+    if (flowSwitch === 'hc') {
+      updateSession(phone, { state: 'HC_NAME', data: {} });
+      if (lang === 'hindi') return `ठीक है! होम कलेक्शन शुरू करते हैं।\n\nकृपया अपना पूरा नाम बताएं।`;
+      if (lang === 'hinglish') return `Theek hai! Home collection shuru karte hain.\n\nKripya apna poora naam batayein.`;
+      return `Sure! Switching to home collection.\n\nPlease provide your *full name*.`;
+    }
+    if (flowSwitch === 'appt') {
+      updateSession(phone, { state: 'APPT_NAME', data: {} });
+      if (lang === 'hindi') return `ठीक है! अपॉइंटमेंट बुकिंग शुरू करते हैं।\n\nकृपया अपना पूरा नाम बताएं।`;
+      if (lang === 'hinglish') return `Theek hai! Appointment booking shuru karte hain.\n\nKripya apna poora naam batayein.`;
+      return `Sure! Switching to appointment booking.\n\nPlease provide your *full name*.`;
+    }
+    if (flowSwitch === 'cr') {
+      updateSession(phone, { state: 'CR_NAME', data: {} });
+      if (lang === 'hinglish') return `Theek hai! Contact request shuru karte hain.\n\nKripya apna poora naam batayein.`;
+      return `Sure! Initiating contact request.\n\nPlease provide your *full name*.`;
+    }
+  }
+
+  // 2. Mid-flow: if user asks a quick general question, answer and re-prompt
+  //    (only for steps where any text input could be ambiguous)
+  const isNameStep = ['APPT_NAME', 'HC_NAME', 'CR_NAME'].includes(state);
+  const isPhoneStep = ['APPT_PHONE', 'HC_PHONE', 'CR_PHONE'].includes(state);
+
+  if ((isNameStep || isPhoneStep) && isGeneralQuestion(text)) {
+    const answer = quickAnswer(text) || await aiReply(text, session);
+    const currentPrompt = reprompt(state, lang, data);
+    return `${answer}\n\n---\n${currentPrompt}`;
+  }
 
   // ── APPOINTMENT FLOW ───────────────────────────────────────
   if (state === 'APPT_NAME') {
-    if (text.trim().length < 2) return 'Please provide your full name.';
     const name = text.trim();
+    // Reject if too short or looks like a command/keyword
+    if (name.length < 2 || FLOW_KEYWORDS.test(name)) {
+      return lang === 'hindi' ? 'कृपया अपना पूरा नाम बताएं (जैसे: रामेश पटेल)।'
+        : lang === 'hinglish' ? 'Kripya apna poora naam batayein (jaise: Ramesh Patel).'
+        : 'Please provide your *full name* (e.g. Ramesh Patel).';
+    }
     updateSession(phone, { state: 'APPT_PHONE', data: { name } });
     if (lang === 'hindi') return `नाम दर्ज किया गया। कृपया अपना फोन नंबर दें।`;
-    if (lang === 'hinglish') return `Naam note kar liya gaya. Kripya apna phone number dijiye, ${name}.`;
+    if (lang === 'hinglish') return `Naam note kar liya gaya. Kripya apna phone number dijiye.`;
     return `Name recorded. Please specify your *contact number*.`;
   }
 
   if (state === 'APPT_PHONE') {
-    const digits = text.replace(/\D/g, '');
-    if (digits.length < 10) {
+    // Handle corrections like "sorry my number is 9XXXXXXXXX" or "mera phone 9XXXXXXXXX hai"
+    const extractedPhone = extractPhoneFromCorrection(text);
+    if (!extractedPhone) {
       return lang === 'hindi' ? 'कृपया सही 10 अंकों का नंबर दें।'
+        : lang === 'hinglish' ? 'Kripya sahi 10 digit number dijiye.'
         : 'Please share a valid 10-digit phone number.';
     }
-    updateSession(phone, { state: 'APPT_DEPT', data: { phone: digits } });
+    updateSession(phone, { state: 'APPT_DEPT', data: { phone: extractedPhone } });
     if (lang === 'hindi')
       return `✅ धन्यवाद। कृपया अपना *विभाग* चुनें:\n\n1️⃣ पैथोलॉजी (खून की जांच)\n2️⃣ रेडियोलॉजी (X-Ray, स्कैन)\n3️⃣ कार्डियोलॉजी (हृदय)\n4️⃣ सामान्य जांच`;
     if (lang === 'hinglish')
@@ -306,7 +482,13 @@ export async function handleUserMessage(phone: string, text: string): Promise<st
   if (state === 'APPT_DEPT') {
     const dept = matchDept(text);
     if (!dept) {
+      // Check if it's a general question first
+      if (isGeneralQuestion(text)) {
+        const answer = quickAnswer(text) || await aiReply(text, session);
+        return `${answer}\n\n---\n${reprompt(state, lang, data)}`;
+      }
       return lang === 'hindi' ? 'कृपया 1, 2, 3 या 4 में से चुनें।'
+        : lang === 'hinglish' ? 'Kripya 1, 2, 3 ya 4 mein se chunein.'
         : 'Please reply with 1, 2, 3, or 4 to select your department.';
     }
     updateSession(phone, { state: 'APPT_DATE', data: { department: dept } });
@@ -318,25 +500,37 @@ export async function handleUserMessage(phone: string, text: string): Promise<st
   }
 
   if (state === 'APPT_DATE') {
+    // If user asks a question mid-step, answer and re-prompt
+    if (isGeneralQuestion(text) && !/\d{1,2}[\/\-]\d{1,2}/.test(text)) {
+      const answer = quickAnswer(text) || await aiReply(text, session);
+      return `${answer}\n\n---\n${reprompt(state, lang, data)}`;
+    }
     const formattedDate = parseInputDate(text, 7);
     if (formattedDate === 'TOO_LATE') {
       return lang === 'hindi' ? 'आज के लिए अपॉइंटमेंट बुकिंग बंद हो गई है (शाम 5 बजे के बाद)। कृपया कल या किसी अन्य तारीख को चुनें।'
+        : lang === 'hinglish' ? 'Aaj ke liye booking band ho gayi hai (5 PM ke baad). Kal ya koi aur date chunein.'
         : 'Same-day bookings are closed after 5:00 PM. Please select tomorrow or another date.';
     }
     if (!formattedDate) {
-      return lang === 'hindi' ? 'कृपया एक वैध तारीख दर्ज करें (अगले 7 दिनों के भीतर)।'
+      return lang === 'hindi' ? 'कृपया एक वैध तारीख दर्ज करें (अगले 7 दिनों के भीतर)। उदाहरण: 20/04/2026'
+        : lang === 'hinglish' ? 'Ek valid date dijiye (agle 7 din ke andar). Jaise: 20/04/2026'
         : 'Please provide a valid date (within the next 7 days). E.g. 20/04/2026';
     }
     updateSession(phone, { state: 'APPT_SLOT', data: { date: formattedDate } });
     if (lang === 'hindi')
-      return `Date noted: ${formattedDate}.\n\nKaunsa time slot prefer karenge?\n\n1️⃣ Morning (9 AM – 12 PM)\n2️⃣ Afternoon (1 PM – 4 PM)\n3️⃣ Evening (5 PM – 8 PM)`;
+      return `तारीख: ${formattedDate}।\n\nकौनसा समय पसंद करेंगे?\n\n1️⃣ सुबह (9 AM – 12 PM)\n2️⃣ दोपहर (1 PM – 4 PM)\n3️⃣ शाम (5 PM – 8 PM)`;
     return `Date recorded: ${formattedDate}.\n\nWhich time slot do you prefer?\n\n1️⃣ Morning (9 AM – 12 PM)\n2️⃣ Afternoon (1 PM – 4 PM)\n3️⃣ Evening (5 PM – 8 PM)`;
   }
 
   if (state === 'APPT_SLOT') {
     const slot = matchSlot(text);
     if (!slot) {
+      if (isGeneralQuestion(text)) {
+        const answer = quickAnswer(text) || await aiReply(text, session);
+        return `${answer}\n\n---\n${reprompt(state, lang, data)}`;
+      }
       return lang === 'hindi' ? 'कृपया 1 (सुबह), 2 (दोपहर), या 3 (शाम) चुनें।'
+        : lang === 'hinglish' ? 'Kripya 1 (subah), 2 (dopahar), ya 3 (sham) chunein.'
         : 'Please choose 1 (Morning), 2 (Afternoon), or 3 (Evening).';
     }
     const fd = data as Record<string, string>;
@@ -355,15 +549,12 @@ export async function handleUserMessage(phone: string, text: string): Promise<st
         }
       } catch (e) { console.error('Admin notify failed', e) }
       
-      const success = true;
-      if (success) {
-        resetSession(phone);
-        if (lang === 'hindi')
-          return `🎉 *बुकिंग हो गई!*\n\n👤 ${fd['name']}\n🏥 ${fd['department']}\n📅 ${fd['date']}\n⏰ ${slot}\n\nहमारा स्टाफ जल्द ही कन्फर्म करेगा और आपको यहां WhatsApp पर बताएगा। 😊\n\nकोई जरूरी काम हो तो: *0261-227-7119*`;
-        if (lang === 'hinglish')
-          return `🎉 *Booking ho gayi!*\n\n👤 ${fd['name']}\n🏥 ${fd['department']}\n📅 ${fd['date']}\n⏰ ${slot}\n\nHamara staff jald confirm karega aur aapko WhatsApp pe batayega. 😊\nUrgent: *0261-227-7119*`;
-        return `🎉 *You're all set, ${fd['name']}!*\n\n*Booking Summary:*\n🏥 ${fd['department']}\n📅 ${fd['date']}\n⏰ ${slot}\n\nOur team will confirm your appointment shortly and notify you right here. 😊\n\nNeed anything urgent? Call *0261-227-7119*`;
-      }
+      resetSession(phone);
+      if (lang === 'hindi')
+        return `🎉 *बुकिंग हो गई!*\n\n👤 ${fd['name']}\n🏥 ${fd['department']}\n📅 ${fd['date']}\n⏰ ${slot}\n\nहमारा स्टाफ जल्द ही कन्फर्म करेगा और आपको यहां WhatsApp पर बताएगा। 😊\n\nकोई जरूरी काम हो तो: *0261-227-7119*`;
+      if (lang === 'hinglish')
+        return `🎉 *Booking ho gayi!*\n\n👤 ${fd['name']}\n🏥 ${fd['department']}\n📅 ${fd['date']}\n⏰ ${slot}\n\nHamara staff jald confirm karega aur aapko WhatsApp pe batayega. 😊\nUrgent: *0261-227-7119*`;
+      return `🎉 *You're all set, ${fd['name']}!*\n\n*Booking Summary:*\n🏥 ${fd['department']}\n📅 ${fd['date']}\n⏰ ${slot}\n\nOur team will confirm your appointment shortly and notify you right here. 😊\n\nNeed anything urgent? Call *0261-227-7119*`;
     } catch (e) { console.error('Booking error:', e); }
     resetSession(phone);
     return `Hmm, something went sideways on our end. 😔 Please call us at *0261-227-7119* and we'll book you in right away!`;
@@ -371,24 +562,32 @@ export async function handleUserMessage(phone: string, text: string): Promise<st
 
   // ── HOME COLLECTION FLOW ───────────────────────────────────
   if (state === 'HC_NAME') {
-    if (text.trim().length < 2) return 'Please provide your full name for the home collection.';
-    updateSession(phone, { state: 'HC_PHONE', data: { name: text.trim() } });
+    const name = text.trim();
+    if (name.length < 2 || FLOW_KEYWORDS.test(name)) {
+      return lang === 'hindi' ? 'कृपया अपना पूरा नाम बताएं (जैसे: रामेश पटेल)।'
+        : lang === 'hinglish' ? 'Kripya apna poora naam batayein (jaise: Ramesh Patel).'
+        : 'Please provide your *full name* (e.g. Ramesh Patel).';
+    }
+    updateSession(phone, { state: 'HC_PHONE', data: { name } });
     if (lang === 'hindi') return `नाम दर्ज किया गया। कृपया अपना फोन नंबर दें।`;
     if (lang === 'hinglish') return `Naam note kar liya gaya. Aapka phone number kya hai?`;
     return `Name recorded. Please specify your *contact number*.`;
   }
 
   if (state === 'HC_PHONE') {
-    const digits = text.replace(/\D/g, '');
-    if (digits.length < 10) return 'Please provide a valid 10-digit phone number.';
-    updateSession(phone, { state: 'HC_ADDRESS', data: { phone: digits } });
+    const extractedPhone = extractPhoneFromCorrection(text);
+    if (!extractedPhone) return 'Please provide a valid 10-digit phone number.';
+    updateSession(phone, { state: 'HC_ADDRESS', data: { phone: extractedPhone } });
     if (lang === 'hindi') return `कृपया अपना पूरा पता (मकान नंबर, एरिया, और लैंडमार्क) बताएं।`;
     if (lang === 'hinglish') return `Kripya apna poora address (area aur landmark ke saath) batayein.`;
     return `Contact recorded. Please provide your *complete address* for the collection, including area and landmark.`;
   }
 
   if (state === 'HC_ADDRESS') {
-    if (text.trim().length < 5) return 'Please provide a complete address.';
+    if (text.trim().length < 5) {
+      return lang === 'hinglish' ? 'Thoda aur detail mein address batayein (area aur landmark).'
+        : 'Please provide a more complete address (include area and landmark).';
+    }
     updateSession(phone, { state: 'HC_TESTS', data: { address: text.trim() } });
     if (lang === 'hindi') return `पता नोट किया गया। कृपया आवश्यक टेस्ट बताएं (उदाहरण: CBC, Sugar)। यदि स्पष्ट नहीं है तो 'not sure' लिखें।`;
     if (lang === 'hinglish') return `Address note kar liya. Kaunse tests karwane hain? Pata nahi toh "not sure" likhein.`;
@@ -403,13 +602,19 @@ export async function handleUserMessage(phone: string, text: string): Promise<st
   }
 
   if (state === 'HC_DATE') {
+    if (isGeneralQuestion(text) && !/\d{1,2}[\/\-]\d{1,2}/.test(text)) {
+      const answer = quickAnswer(text) || await aiReply(text, session);
+      return `${answer}\n\n---\n${reprompt(state, lang, data)}`;
+    }
     const formattedDate = parseInputDate(text, 2);
     if (formattedDate === 'TOO_LATE') {
       return lang === 'hindi' ? 'आज के लिए होम कलेक्शन बुकिंग बंद हो गई है (शाम 5 बजे के बाद)। कृपया कल को चुनें।'
+        : lang === 'hinglish' ? 'Aaj ke liye band ho gayi hai. Kal ke liye book karein.'
         : 'Same-day collections are closed after 5:00 PM. Please schedule for tomorrow instead.';
     }
     if (!formattedDate) {
       return lang === 'hindi' ? 'कृपया एक वैध तारीख दर्ज करें (केवल आज और कल अनुमत हैं)।'
+        : lang === 'hinglish' ? 'Valid date dijiye (sirf aaj ya kal). Jaise: 20/04/2026'
         : 'Please provide a valid date format (only today and tomorrow are permitted). E.g. 20/04/2026';
     }
     updateSession(phone, { state: 'HC_TIME', data: { date: formattedDate } });
@@ -420,7 +625,14 @@ export async function handleUserMessage(phone: string, text: string): Promise<st
 
   if (state === 'HC_TIME') {
     const timeSlot = matchTime(text);
-    if (!timeSlot) return 'Please choose 1 (Morning), 2 (Mid-day), or 3 (Afternoon).';
+    if (!timeSlot) {
+      if (isGeneralQuestion(text)) {
+        const answer = quickAnswer(text) || await aiReply(text, session);
+        return `${answer}\n\n---\n${reprompt(state, lang, data)}`;
+      }
+      return lang === 'hinglish' ? '1 (Subah), 2 (Dopahar), ya 3 (Sham) chunein.'
+        : 'Please choose 1 (Morning), 2 (Mid-day), or 3 (Afternoon).';
+    }
     const fd = data as Record<string, string>;
     try {
       await appendHomeCollection({
@@ -437,15 +649,12 @@ export async function handleUserMessage(phone: string, text: string): Promise<st
         }
       } catch (e) { console.error('Admin notify failed', e) }
 
-      const success = true;
-      if (success) {
-        resetSession(phone);
-        if (lang === 'hindi')
-          return `होम कलेक्शन अनुरोध पुष्टि:\n\n👤 ${fd['name']}\n📍 ${fd['address']}\n🧪 ${fd['tests']}\n📅 ${fd['date']}\n⏰ ${timeSlot}\n\nहमारी टीम समय पर पहुंचेगी।\nसहायता: 0261-227-7119`;
-        if (lang === 'hinglish')
-          return `Home collection request confirmed:\n\n👤 ${fd['name']}\n📍 ${fd['address']}\n🧪 ${fd['tests']}\n📅 ${fd['date']}\n⏰ ${timeSlot}\n\nHamari team samay par pahuchegi.\nHelpline: 0261-227-7119`;
-        return `Home Collection Summary:\n\n👤 ${fd['name']}\n📍 ${fd['address']}\n🧪 ${fd['tests']}\n📅 ${fd['date']}\n⏰ ${timeSlot}\n\nOur phlebotomist will arrive as scheduled.\nFor emergencies: 0261-227-7119`;
-      }
+      resetSession(phone);
+      if (lang === 'hindi')
+        return `✅ होम कलेक्शन अनुरोध पुष्टि:\n\n👤 ${fd['name']}\n📍 ${fd['address']}\n🧪 ${fd['tests']}\n📅 ${fd['date']}\n⏰ ${timeSlot}\n\nहमारी टीम समय पर पहुंचेगी।\nसहायता: 0261-227-7119`;
+      if (lang === 'hinglish')
+        return `✅ Home collection request confirmed:\n\n👤 ${fd['name']}\n📍 ${fd['address']}\n🧪 ${fd['tests']}\n📅 ${fd['date']}\n⏰ ${timeSlot}\n\nHamari team samay par pahuchegi.\nHelpline: 0261-227-7119`;
+      return `✅ Home Collection Confirmed:\n\n👤 ${fd['name']}\n📍 ${fd['address']}\n🧪 ${fd['tests']}\n📅 ${fd['date']}\n⏰ ${timeSlot}\n\nOur phlebotomist will arrive as scheduled.\nFor emergencies: 0261-227-7119`;
     } catch (e) { console.error('HC error:', e); }
     resetSession(phone);
     return `An error occurred while processing your request. Please contact 0261-227-7119 directly.`;
@@ -453,17 +662,21 @@ export async function handleUserMessage(phone: string, text: string): Promise<st
 
   // ── CONTACT REQUEST FLOW ───────────────────────────────────
   if (state === 'CR_NAME') {
-    if (text.trim().length < 2) return 'Please provide a valid full name.';
-    updateSession(phone, { state: 'CR_PHONE', data: { name: text.trim() } });
+    const name = text.trim();
+    if (name.length < 2 || FLOW_KEYWORDS.test(name)) {
+      return lang === 'hinglish' ? 'Kripya apna poora naam batayein.'
+        : 'Please provide a valid *full name*.';
+    }
+    updateSession(phone, { state: 'CR_PHONE', data: { name } });
     if (lang === 'hindi') return `धन्यवाद। कृपया अपना फोन नंबर प्रदान करें।`;
     if (lang === 'hinglish') return `Dhanyavaad. Kripya apna phone number dijiye.`;
     return `Thank you. Please provide your contact number.`;
   }
 
   if (state === 'CR_PHONE') {
-    const digits = text.replace(/\D/g, '');
-    if (digits.length < 10) return 'Please provide a valid 10-digit phone number.';
-    updateSession(phone, { state: 'CR_EMAIL', data: { phone: digits } });
+    const extractedPhone = extractPhoneFromCorrection(text);
+    if (!extractedPhone) return 'Please provide a valid 10-digit phone number.';
+    updateSession(phone, { state: 'CR_EMAIL', data: { phone: extractedPhone } });
     if (lang === 'hindi') return `नोट किया गया। कृपया अपना ईमेल एड्रेस बताएं। (या 'skip' लिखें)`;
     if (lang === 'hinglish') return `Noted. Kripya apna email address batayein. (Ya 'skip' likhein)`;
     return `Noted. Please provide your email address. (Or type 'skip')`;
